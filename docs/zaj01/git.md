@@ -84,7 +84,7 @@ git commit -m "First commit"
 ```
 Wypchnij zmiany na zdalne repozytorium:
 ```sh
-git push -u origin lokalna-nazwa-galezi:main
+git push -u origin lokalna-nazwa-galezi:main --force
 ```
 
 ### 6. Pobieranie zmian z repozytorium
