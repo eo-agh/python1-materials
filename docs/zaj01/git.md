@@ -1,4 +1,4 @@
-W tym module poznasz podstawowe informacje o systemie kontroli wersji git oraz nauczysz się, jak połączyć się z repozytorium zdalnym. Omówimy instalację gita, konfigurację użytkownika, klonowanie repozytorium oraz wysyłanie i pobieranie zmian.
+W tym module poznasz podstawowe informacje o systemie kontroli wersji git. Omówimy commity, synchronizację z repozytorium zdalnym, pracę z gałęziami oraz współpracę przez pull requesty.
 
 ## Czym jest git?
 
