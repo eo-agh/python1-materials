@@ -41,8 +41,11 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.details
 
+watch:
+  - docs
+
 nav:
   - Strona główna: index.md
   - Podstawy programowania:
     - 👽 Środowisko lokalne: zaj0/srod-lok.md
-    - 🌞 GIT - kontrola wersji: zaj01/git.md
+    - 🌞 Git - kontrola wersji: zaj01/git.md

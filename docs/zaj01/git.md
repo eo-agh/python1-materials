@@ -14,93 +14,100 @@ Git to rozproszony system kontroli wersji, który umożliwia śledzenie zmian w 
 
 ## Połączenie z repozytorium zdalnym
 
-Aby połączyć się z repozytorium zdalnym, musisz wykonać następujące kroki:
+Tą funkcjonalość mamy już opanowaną - zrobiliśmy to w poprzednich krokach.
 
-### 1. Instalacja gita
-Jeśli nie masz jeszcze gita, możesz go zainstalować:
+## Co to są commity i jak działają?
 
-- **Linux (Ubuntu/Debian):**
-  ```sh
-  sudo apt update
-  sudo apt install git
-  ```
+???+ info "Commit - zapisywanie zmian"
 
-- **Windows:** Pobierz instalator ze strony [git-scm.com](https://git-scm.com/) i zainstaluj.
+    **Commit** to jak "zapisanie gry" w programowaniu. To moment, w którym zapisujesz aktualny stan swoich plików w repozytorium git. Każdy commit ma unikalny identyfikator (hash) i zawiera informacje o tym, co zostało zmienione, kiedy i przez kogo.
 
-- **macOS:**
-  ```sh
-  brew install git
-  ```
+    **Dlaczego commity są ważne?**
 
-Po instalacji sprawdź wersję:
-```sh
-git --version
-```
+    - Pozwalają śledzić historię zmian w kodzie.
+    - Umożliwiają powrót do wcześniejszych wersji.
+    - Ułatwiają współpracę w zespole.
+    - Pomagają zrozumieć, co i dlaczego zostało zmienione.
 
-### 2. Konfiguracja użytkownika
-Przed rozpoczęciem pracy skonfiguruj swoje dane:
-```sh
-git config user.name "Twoje Imię i Nazwisko"
-git config user.email "twoj@email.com"
-```
+    **Podstawowy workflow z commitami**:
+    ```sh
+    # 1. Sprawdź status plików
+    git status
+    
+    # 2. Dodaj pliki do staging area (przygotowanie do commita)
+    git add nazwa-pliku.py
+    # lub dodaj wszystkie zmienione pliki:
+    git add .
+    
+    # 3. Stwórz commit z opisem zmian
+    git commit -m "Add function to calculate average"
+    ```
 
-!!! danger "Link do Twojego repozytorium zdalnego dostaniesz od prowadzącego zajęcia!"
+    **Dobre praktyki przy commitach**:
 
-### 3. Klonowanie repozytorium zdalnego
+    - Pisz jasne i zwięzłe opisy commitów.
+    - Commituj często, ale tylko logicznie spójne zmiany.
+    - Używaj czasu teraźniejszego w opisach (np. "Add function" zamiast "Added function").
 
-!!! danger "Tego kroku nie robimy, to tylko przykład, nas interesuje punkt 4."
+    **Przykłady dobrych opisów commitów**:
+    ```
+    "Fix calculation bug in average function"
+    "Add input validation for user data"
+    "Remove unused imports"
+    "Update function documentation"
+    ```
 
-Jeśli chcesz pobrać istniejące repozytorium, użyj komendy:
-```sh
-git clone https://github.com/uzytkownik/nazwa-repozytorium.git
-```
-Lub jeśli używasz SSH:
-```sh
-git clone git@github.com:uzytkownik/nazwa-repozytorium.git
-```
+## Synchronizacja z repozytorium zdalnym
 
-### 4. Połączenie istniejącego katalogu z repozytorium
-Jeśli masz już lokalny projekt i chcesz połączyć go z repozytorium zdalnym:
-```sh
-git init
-```
-Dodaj zdalne repozytorium:
-```sh
-git remote add origin https://github.com/uzytkownik/nazwa-repozytorium.git
-```
-Sprawdź, czy połączenie zostało poprawnie dodane:
-```sh
-git remote -v
-```
+???+ info "Push, Pull i Fetch"
 
-### 5. Wysyłanie zmian do repozytorium
-Dodaj pliki do wersjonowania:
-```sh
-git add .
-```
-Zatwierdź zmiany:
-```sh
-git commit -m "First commit"
-```
-Wypchnij zmiany na zdalne repozytorium:
-```sh
-git push -u origin lokalna-nazwa-galezi:main --force
-```
+    Gdy pracujesz (chociażby na tych zajęciach), musisz synchronizować zmiany z repozytorium zdalnym (np. na GitHubie). To dopiero tam inni zainteresowani będą mieć wgląd w kod i zmiany.
 
-### 6. Pobieranie zmian z repozytorium
-Aby pobrać najnowsze zmiany z repozytorium:
-```sh
-git pull origin main
-```
+    **Push - wysyłanie zmian na serwer**:
+    ```sh
+    git push origin nazwa-galezi
+    ```
+    Wysyła twoje lokalne commity do repozytorium zdalnego. `origin` to domyślna nazwa repozytorium zdalnego, a `nazwa-galezi` to gałąź, którą chcesz wysłać.
+
+    **Pull - pobieranie i scalanie zmian**:
+    ```sh
+    git pull origin nazwa-galezi
+    ```
+    Pobiera zmiany z repozytorium zdalnego i automatycznie scala je z twoją lokalną gałęzią. To skrót dla `git fetch` + `git merge`.
+
+    **Fetch - tylko pobieranie informacji**:
+    ```sh
+    git fetch origin
+    ```
+    Pobiera informacje o zmianach z repozytorium zdalnego, ale nie scala ich automatycznie. Pozwala sprawdzić, co się zmieniło, zanim zdecydujesz się na scalenie.
+
+    **Kiedy używać którego polecenia?**
+
+    - `git push` - gdy skończyłeś pracę nad funkcją i chcesz udostępnić zmiany innym.
+    - `git pull` - gdy chcesz pobrać najnowsze zmiany od innych programistów.
+    - `git fetch` - gdy chcesz tylko sprawdzić, czy są nowe zmiany, bez ich scalania.
+
+    **Typowy workflow**:
+    ```sh
+    # Przed rozpoczęciem pracy - pobierz najnowsze zmiany
+    git pull origin main
+    
+    # Po skończeniu pracy - wyślij swoje zmiany
+    git push origin moja-galez
+    ```
+
+## 📝 Zadania
+
+1. Przenieś swoje zmiany po wykonanym poprzednim zadaniu do staging area.
+2. Zacommituj je.
+3. Wypchnij swoje zmiany do repozytorium zdalnego.
 
 ---
 
-Teraz masz podstawową wiedzę na temat gita i połączenia się z repozytorium zdalnym. Możesz rozpocząć pracę nad swoimi zadaniami!
+## Gałęzie
 
-!!! tip "Nowoczesne IDE mają moduły do obsługi kontroli wersji, więc możemy używać interfejsu graficznego zamiast poleceń w terminalu."
-
-???- tip "Praca z gałęziami"
-    ## Gałęzie (branches)
+???+ info "Branches"
+    
     Gałęzie pozwalają na jednoczesne rozwijanie różnych funkcji projektu bez wpływania na główną wersję kodu. To bardzo użyteczne, gdy kilka osób pracuje nad różnymi aspektami projektu lub gdy testujesz nowe funkcjonalności przed ich wdrożeniem do głównej wersji kodu.
 
     **Tworzenie nowej gałęzi**:
@@ -125,17 +132,68 @@ Teraz masz podstawową wiedzę na temat gita i połączenia się z repozytorium 
     Dzięki temu unikasz konieczności tworzenia gałęzi i przełączania się na nią osobno.
 
     **Merging (scalanie gałęzi)**:
-    Aby scalić zmiany z innej gałęzi do głównej (`main`):
-    ```sh
-    git checkout main
-    ```
-    ```sh
-    git merge nazwa-galezi
-    ```
-    Scalanie przydaje się, gdy zakończysz prace nad nową funkcjonalnością i chcesz dodać ją do głównej wersji kodu.
 
-???- tip "Revert i Reset"
-    ## Wycofywanie zmian
+    Przykład: synchronizacja swojej gałęzi z najnowszymi zmianami z `main`:
+    ```sh
+    # 1. Przełącz się na swoją gałąź
+    git checkout feature/kalkulator
+    
+    # 2. Pobierz najnowsze zmiany z main
+    git pull origin main
+    
+    # 3. Scal zmiany z main do swojej gałęzi
+    git merge main
+    
+    # 4. Wyślij zaktualizowaną gałąź
+    git push origin feature/kalkulator
+    ```
+    
+    **Kiedy to robić?**
+
+    - Gdy ktoś inny dodał zmiany do main, a ty chcesz mieć najnowszą wersję.
+    - Gdy chcesz uniknąć konfliktów przy końcowym mergowaniu.
+    - Gdy chcesz przetestować swoją funkcję z najnowszymi zmianami.
+    
+    **Alternatywnie - rebase (bardziej eleganckie)**:
+    ```sh
+    git checkout feature/kalkulator
+    git pull origin main
+    git rebase main
+    git push origin feature/kalkulator
+    ```
+
+## Współpraca przez repozytorium zdalne
+
+???+ info "Pull Requests"
+
+    Pull Requesty to sposób na proponowanie zmian w kodzie i ich review przed mergowaniem do głównej gałęzi.
+
+    **Workflow**:
+
+    1. Wyślij gałąź na serwer: `git push origin feature/kalkulator`.
+    2. Na GitHubie kliknij "Compare & pull request".
+    3. Wypełnij tytuł i opis zmian.
+    4. Poproś o review od innych programistów.
+    5. Po zaakceptowaniu - merge do głównej gałęzi.
+
+    **Dlaczego PR?**
+
+    - Code review przed mergowaniem.
+    - Dokumentacja zmian i dyskusji.
+    - Lepsza jakość kodu.
+    - Współpraca w zespole.
+
+---
+
+Teraz masz podstawową wiedzę na temat gita. Możemy zaczynać pracę nad Pythonem!
+
+!!! tip "Nowoczesne IDE mają moduły do obsługi kontroli wersji, więc możemy używać interfejsu graficznego zamiast poleceń w terminalu."
+
+---
+
+## Przydatne w codziennej pracy
+
+???- tip "Revert i Reset - wycofywanie zmian"
 
     Błędy zdarzają się każdemu. Dlatego git oferuje kilka metod na ich cofnięcie.
 
@@ -158,7 +216,6 @@ Teraz masz podstawową wiedzę na temat gita i połączenia się z repozytorium 
     Przywraca wersję pliku do ostatniego stanu w repozytorium. Przydatne, jeśli zmieniłeś plik przez pomyłkę.
 
 ???- tip "Stash – przechowanie tymczasowych zmian"
-    ## Przechowywanie tymczasowych zmian (stash)
     
     Czasami pracujemy nad jakąś zmianą, ale musimy pilnie przełączyć się na inną gałąź. W takich przypadkach możemy użyć `stash`.
 
@@ -175,7 +232,6 @@ Teraz masz podstawową wiedzę na temat gita i połączenia się z repozytorium 
     Dzięki temu odzyskujesz zapisane zmiany.
 
 ???- tip "Sprawdzanie historii commitów"
-    ## Historia commitów
 
     Historia commitów pomaga w śledzeniu zmian w kodzie, co jest szczególnie przydatne w zespołach.
 
@@ -191,7 +247,6 @@ Teraz masz podstawową wiedzę na temat gita i połączenia się z repozytorium 
     Pozwala szybko zobaczyć strukturę commitów i ich relacje.
 
 ???- tip "Usuwanie plików z repozytorium i `.gitignore`"
-    ## .gitignore
 
     Nie zawsze chcemy, aby dany plik był częścią repozytorium.
 
@@ -225,7 +280,6 @@ Teraz masz podstawową wiedzę na temat gita i połączenia się z repozytorium 
     Plik `.gitignore` powinien być umieszczony w głównym katalogu repozytorium.
 
 ???- tip "git LFS (Large File Storage)"
-    ## git LFS
 
     Jeśli pracujesz z dużymi plikami, git może nie być optymalny do ich przechowywania. Git LFS (Large File Storage) to rozszerzenie gita, które pozwala przechowywać duże pliki osobno od kodu źródłowego.
 

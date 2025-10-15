@@ -1,9 +1,55 @@
-# 📌 **Środowisko lokalne do pracy z Pythonem w Dockerze**
+# 📌 **Środowisko lokalne do pracy z Pythonem w kontenerze**
 
-## 🏁 1. Wprowadzenie
 Na tych zajęciach skonfigurujemy środowisko do pracy z Pythonem w kontenerze **Docker**. Dzięki temu każdy będzie miał **spójne, odizolowane środowisko**, w którym można instalować pakiety, uruchamiać skrypty i pracować z Pythonem **interaktywnie z poziomu IDE**.
 
 ---
+
+## 🏁 1. Połączenie z repozytorium w GitHub
+
+### 1.1 Instalacja git
+
+Jeśli nie masz jeszcze gita, możesz go zainstalować:
+
+- **Linux (Ubuntu/Debian):**
+  ```sh
+  sudo apt update
+  sudo apt install git
+  ```
+
+- **Windows:** Pobierz instalator ze strony [git-scm.com](https://git-scm.com/) i zainstaluj.
+
+- **macOS:**
+  ```sh
+  brew install git
+  ```
+
+Po instalacji sprawdź wersję w terminalu:
+```sh
+git --version
+```
+
+### 1.2 Klonowanie repozytorium zdalnego
+
+!!! danger "Link do Twojego repozytorium zdalnego dostaniesz od prowadzącego zajęcia!"
+
+Stwórz lokalną kopię repozytorium, użyj komendy:
+```sh
+git clone https://github.com/uzytkownik/nazwa-repozytorium.git
+```
+Lub jeśli używasz SSH:
+```sh
+git clone git@github.com:uzytkownik/nazwa-repozytorium.git
+```
+
+### 1.3 Konfiguracja użytkownika
+
+1. Wejdź w terminalu do folderu ze sklonowanym projektem.
+2. Skonfiguruj swoje dane:
+
+```sh
+git config user.name "Twoje Imię i Nazwisko"
+git config user.email "twoj@email.com"
+```
 
 ## 🛠 2. Instalacja Dockera
 
@@ -43,74 +89,71 @@ Na tych zajęciach skonfigurujemy środowisko do pracy z Pythonem w kontenerze *
 
 ---
 
-## 🔧 3. Tworzenie środowiska w Dockerze
+## 🔧 3. Konfiguracja IDE (VS Code) z Dockerem i Miniforge
 
-### 📂 3.1. Tworzenie folderu projektu
-Wybierz katalog, w którym chcesz pracować:
-```sh
-mkdir python1 && cd python1
-```
+- **Otwórz katalog projektu** w VS Code.
+- Zapoznaj się z widocznymi tam plikami:
 
-### 📜 3.2. Tworzenie pliku `Dockerfile`
-Stwórz plik `Dockerfile` i dodaj następującą zawartość:
-```dockerfile
-FROM condaforge/miniforge3:latest
+???- info "Plik `Dockerfile`"
 
-WORKDIR /app
+    Ten plik definiuje obraz Dockera z preinstalowanym Pythonem i condą.
 
-CMD ["/bin/bash", "-l"]
-```
+    ```dockerfile
+    FROM condaforge/miniforge3:latest
 
-### ⚙️ 3.3. Tworzenie pliku konfiguracyjnego VS Code
-Aby ułatwić integrację Dockera z VS Code, utwórz folder `.devcontainer` w katalogu projektu i w nim plik `devcontainer.json`:
-```json
-{
-    "name": "Python Dev Container",
-    "build": {
-        "dockerfile": "../Dockerfile"
-    },
-    "workspaceFolder": "/app",
-    "mounts": [
-        "source=${localWorkspaceFolder},target=/app,type=bind,consistency=cached"
-    ],
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "terminal.integrated.defaultProfile.linux": "bash"
-            },
-            "extensions": [
-                "ms-python.python",
-                "ms-vscode-remote.remote-containers",
-                "ms-vscode-remote.dev-containers"
-            ]
+    WORKDIR /app
+
+    CMD ["/bin/bash", "-l"]
+    ```
+
+???- info "Plik `./.devcontainer/devcontainer.json`"
+
+    Ten plik konfiguruje VS Code do pracy w kontenerze Dockera z odpowiednimi rozszerzeniami.
+
+    ```json
+    {
+        "name": "Python Dev Container",
+        "build": {
+            "dockerfile": "../Dockerfile"
+        },
+        "workspaceFolder": "/app",
+        "mounts": [
+            "source=${localWorkspaceFolder},target=/app,type=bind,consistency=cached"
+        ],
+        "customizations": {
+            "vscode": {
+                "settings": {
+                    "terminal.integrated.defaultProfile.linux": "bash"
+                },
+                "extensions": [
+                    "ms-python.python",
+                    "ms-vscode-remote.remote-containers",
+                    "ms-vscode-remote.dev-containers"
+                ]
+            }
         }
     }
-}
+    ```
 
-```
-
-### 🚀 3.4. Budowanie obrazu Dockera
+- Ręcznie zbuduj obraz w terminalu:
 ```sh
 docker build -t python-env .
 ```
 
-### 🔄 3.5. Uruchamianie kontenera
-Uruchom kontener w trybie interaktywnym i podłącz lokalny katalog:
+- Uruchom kontener w trybie interaktywnym i podłącz lokalny katalog:
 ```sh
 docker run -it -v .:/app python-env /bin/bash -l
 ```
-Dzięki temu wszystkie zmiany w katalogu `python1` będą widoczne w kontenerze.
+Dzięki temu wszystkie zmiany w projekcie będą widoczne w kontenerze.
 
 ---
 
-## 🖥️ 4. Konfiguracja IDE (VS Code) z Dockerem i Miniforge
-Aby połączyć się z kontenerem w **VS Code**:
+Teraz chcemy sobie ułatwić życie, połączyć się do kontenera bezpośrednio z VS Code: 
 
-1. **Zainstaluj rozszerzenie** ➝ `Remote - Containers` lub `Dev Container`.
-2. **Otwórz katalog projektu** w VS Code.
-3. Kliknij `Ctrl+Shift+P` i wybierz **`Remote-Containers: Reopen in Container`**.
-4. VS Code uruchomi kontener i otworzy projekt w odizolowanym środowisku.
-5. Otwórz terminal w VS Code (`Ctrl+~`) i sprawdź aktywne środowisko Conda:
+- **Zainstaluj rozszerzenie** ➝ `Remote - Containers` lub `Dev Container`.
+- Kliknij `Ctrl+Shift+P` i wybierz **`Remote-Containers: Reopen in Container`**.
+- VS Code uruchomi kontener i otworzy projekt w odizolowanym środowisku.
+- Otwórz terminal w VS Code (`Ctrl+~`) i sprawdź aktywne środowisko Conda:
    ```sh
    conda info --envs
    ```
@@ -134,7 +177,7 @@ pip install requests
 
 ---
 
-## 🏃‍♂️ 6. Uruchamianie skryptów
+## 📝 Zadania
 
 Utwórz plik `main.py`:
 
@@ -148,6 +191,6 @@ Uruchom go w kontenerze:
 python main.py
 ```
 
-**Zadanie:** Zrób zrzut ekranu (screenshot) pokazujący wynik działania tego skryptu w terminalu kontenera i wyślij go na czat. 📸
+Zrób zrzut ekranu (screenshot) pokazujący wynik działania tego skryptu w terminalu kontenera i wyślij go na czat 📸
 
 ---
