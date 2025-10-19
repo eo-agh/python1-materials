@@ -195,7 +195,7 @@ print(zbior1 | zbior2)  # Suma zbiorów
 5. Spróbuj zamienić znak na pozycji 2 w łańcuchu w zmiennej `tekst` na znak p
 
     ???- warning "Pojawia Ci się błąd?"
-        Jest to spodziewane, zapoznaj się z błędem i usuń lub zakomentują tą linię kodu.
+        Jest to spodziewane, zapoznaj się z błędem i usuń lub zakomentuj tą linię kodu.
 
 **Listy**
 
