@@ -57,3 +57,11 @@ nav:
     - 🌞 Praca z plikami: zaj01/praca_z_plikami.md
     - 🌞📝 Zadanie sprawdzające: zaj01/zadania_sprawdzajace.md
     - 🌞 Przypisania: zaj01/przypisania.md
+  - Pętle:
+    - ❄️ Wstęp - pętle: zaj02/petle.md
+    - ❄️ Listy składane: zaj02/listy_skladane.md
+    - ❄️ Iteratory: zaj02/iteratory.md
+  - Funkcje:
+    - ❄️ Wstęp - funkcje: zaj02/funkcje.md
+    - ❄️ Funkcje anonimowe - lambda: zaj02/lambda.md
+    - ❄️ Generatory: zaj02/generatory.md
