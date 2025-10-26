@@ -27,11 +27,11 @@ print(f"Wygenerowana liczba: {liczba}")
 
 Trzy kluczowe elementy każdej funkcji:
 
-1. Słowo kluczowe służace definiowaniu funkcji - `def`
+1. Słowo kluczowe służace definiowaniu funkcji - `def`.
 
-2. Argumenty: definiowanie i podawane wewnątrz `()`
+2. Argumenty: definiowanie i podawane wewnątrz `()`.
 
-3. Zwracane wartości - słowo kluczowe `return`
+3. Zwracane wartości - słowo kluczowe `return`.
 
 ## 📝 Zadania
 
@@ -41,10 +41,10 @@ Trzy kluczowe elementy każdej funkcji:
 
     - Jeśli jest integerem, wykonaj `arg = 65482652`.
 
-Wypisz przykłady dla obu przypadków, wypisz wartości przed i po wykonaniu funkcji. Jak się zachowują te obiekty?
+    Wypisz przykłady dla obu przypadków, wypisz wartości przed i po wykonaniu funkcji. Jak się zachowują te obiekty?
 
-!!! tip
-    Warto skorzystać z funkcji `isinstance()`.
+    !!! tip
+        Warto skorzystać z funkcji `isinstance()`.
 
 ??? - note "Teoria: mutowalne i niemutowalne obiekty w funkcjach"
     Kiedy zmienne są przekazywane do funkcji jako argumenty, Python nie tworzy ich kopii, lecz przekazuje referencję do oryginalnego obiektu. W związku z tym sposób, w jaki te obiekty zachowują się wewnątrz funkcji, zależy od ich typu – mutowalne lub niemutowalne.
@@ -139,20 +139,42 @@ przedstaw_sie(imie="Jan", wiek=30, miasto="Kraków")
 
     - Dodaj wartość domyślną dla argumentu `ilosc` równą 1.
 
-!!! warning "Ważna informacja"
-    Wykorzystaj poniższy początek definicji i go nie modyfikuj. Wymusi to podawanie argumentów po gwiazdce jedynie w formie nazwanej.
+    !!! warning "Ważna informacja"
+        Wykorzystaj poniższy początek definicji i go nie modyfikuj. Wymusi to podawanie argumentów po gwiazdce jedynie w formie nazwanej.
 
+        ```python
+        def zamowienie_produktu(nazwa_produktu, *, cena, ilosc):
+        ```
+
+2. Napisz funkcję `oblicz_srednia_ocen`, która przyjmuje nieograniczoną liczbę ocen (użyj `*args`) i zwraca ich średnią. Dodatkowo funkcja powinna przyjmować opcjonalny argument nazwany `wagi` (słownik), który mapuje oceny na ich wagi. Jeśli wagi są podane, funkcja powinna obliczyć średnią ważoną. 
+
+    Przykład wywołania:
     ```python
-    def zamowienie_produktu(nazwa_produktu, *, cena, ilosc):
+    # Średnia zwykła
+    print(oblicz_srednia_ocen(4, 5, 3, 5))  # 4.25
+
+    # Średnia ważona
+    print(oblicz_srednia_ocen(4, 5, 3, 5, wagi={4: 2, 5: 3, 3: 1}))
     ```
 
-1. Napisz funkcję `stworz_raport`, która przyjmuje dowolną liczbę argumentów pozycyjnych (`*args`) i nazwanych (`**kwargs`). Argumenty pozycyjne powinny reprezentować numery ID produktów, a argumenty nazwane - informacje o tych produktach (np. nazwa, cena). Funkcja powinna tworzyć i wyświetlać raport, w którym dla każdego ID produktu podane są szczegółowe informacje na jego temat.
+3. Stwórz funkcję `polynomial_calculator`, która implementuje kalkulator wielomianów. Funkcja powinna przyjmować:
 
-Wywołanie funkcji powinno wyglądać następująco:
+    - `x` - wartość dla której obliczamy wielomian,
+    - `*args` - współczynniki wielomianu (od najwyższej potęgi),
+    - `**kwargs` - opcjonalne parametry: `precyzja` (domyślnie 2), `dziedzina` (wspomagający dict z informacją o dziedzinie),
 
-```python
-stworz_raport(101, 102, nazwa_101="Kubek termiczny", cena_101="45.99 zł", nazwa_102="Długopis", cena_102="4.99 zł")
-```
+    Funkcja oblicza wartość wielomianu dla podanego `x` i zwraca wynik zaokrąglony do podanej precyzji.
+
+    Przykład: wielomian 2x³ + 3x² + x + 1 dla x=2
+    ```python
+    result = polynomial_calculator(2, 2, 3, 1, 1)
+    # Obliczy: 2*(2³) + 3*(2²) + 1*(2) + 1 = 16 + 12 + 2 + 1 = 21
+    ```
+
+    Dodatkowo, jeśli podano `dziedzina` w kwargs, funkcja powinna sprawdzić czy `x` nie wykracza poza dziedzinę i jeśli tak, wypisać odpowiednie ostrzeżenie.
+
+    !!! tip "Wskazówka"
+        Wielomian n-tego stopnia ma n+1 współczynników. Współczynniki w `*args` są podawane od najwyższej potęgi, np. dla ax² + bx + c przekazujemy (a, b, c).
 
 ## Funkcje - praktyczne porady
 

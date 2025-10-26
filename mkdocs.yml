@@ -41,9 +41,6 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.details
 
-watch:
-  - docs
-
 nav:
   - Strona główna: index.md
   - Podstawy programowania:
@@ -60,8 +57,6 @@ nav:
   - Pętle:
     - ❄️ Wstęp - pętle: zaj02/petle.md
     - ❄️ Listy składane: zaj02/listy_skladane.md
-    - ❄️ Iteratory: zaj02/iteratory.md
   - Funkcje:
     - ❄️ Wstęp - funkcje: zaj02/funkcje.md
     - ❄️ Funkcje anonimowe - lambda: zaj02/lambda.md
-    - ❄️ Generatory: zaj02/generatory.md

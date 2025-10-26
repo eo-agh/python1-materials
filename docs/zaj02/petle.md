@@ -73,4 +73,15 @@ print(kwadraty)
 
 1. Mając dwie listy, `imiona = ['Anna', 'Jan', 'Ewa']` i `oceny = [5, 4, 3]`, użyj `zip` do stworzenia pary każdego imienia z odpowiadającą mu oceną. Następnie, iteruj przez te pary, wyświetlając imię wraz z oceną. Co się stanie, jeśli listy będą miały różne długości?
 
-2. Mając listę `liczby = [1, 2, 3, 4, 5]`, napisz funkcję `kwadrat(x)`, która zwraca kwadrat liczby x. Użyj map z tą funkcją, aby stworzyć nową listę, w której każdy element jest kwadratem odpowiadającego mu elementu z listy liczby. Wyświetl tą listę.
+2. Stwórz grę w zgadywanie liczby. Program losuje liczbę z zakresu 1-100, a użytkownik próbuje ją odgadnąć. Program powinien informować, czy liczba jest za duża czy za mała, aż użytkownik trafi. Zliczaj liczbę prób.
+
+    !!! tip "Wskazówka"
+        Aby wczytać dane od użytkownika, użyj funkcji `input()`: `odpowiedz = input("Podaj liczbę: ")`. Funkcja zwraca string, więc aby porównać z liczbą, musisz użyć `int(odpowiedz)` lub `int(input("Podaj liczbę: "))`. Do losowania liczby użyj modułu `random` z funkcją `random.randint(1, 100)`.
+
+3. Masz listę trójkątów reprezentowanych jako krotki: `[(3, 4, 5), (5, 12, 13), (7, 8, 9), (8, 15, 17)]`, gdzie każda krotka to (bok_a, bok_b, bok_c). Napisz kod, który używa `enumerate` do:
+
+    - Wyświetlenia indeksu każdego trójkąta,
+    - Policzenia pola każdego trójkąta (wzór Herona),
+    - Wskazania, który trójkąt jest prostokątny (a² + b² = c²).
+
+    Wypisz informacje tylko dla trójkątów prostokątnych.
