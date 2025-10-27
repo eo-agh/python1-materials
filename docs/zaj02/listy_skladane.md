@@ -77,7 +77,7 @@ kwadraty = [x ** 2 for x in range(6)]
 
 1. Stwórz listę zawierającą kwadraty liczb od 1 do 20, które są podzielne przez 3. 
 
-2. Masz dwie listy `imiona = ['Anna', 'Jan', 'Ewa', 'Piotr']` i `oceny = [5, 4, 3, 5]`. Stwórz listę słowników, gdzie każdy słownik zawiera pary klucz-wartość dla imienia i oceny. 
+2. Masz dwie listy `imiona = ['Anna', 'Jan', 'Ewa', 'Piotr']` i `oceny = [5, 4, 3, 5]`. Stwórz listę słowników, gdzie każdy słownik zawiera pary klucz-wartość dla imienia i oceny. Można skorzystać z funkcji `zip()`.
 
 3. Napisz listę składaną, która dla każdej liczby od 1 do 50 zwraca jej reprezentację stringową (`str`) tylko wtedy, gdy liczba jest równocześnie:
 
