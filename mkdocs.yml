@@ -60,3 +60,12 @@ nav:
   - Funkcje:
     - ❄️ Wstęp - funkcje: zaj02/funkcje.md
     - ❄️ Funkcje anonimowe - lambda: zaj02/lambda.md
+  - Programowanie obiektowe:
+    - 🥕 Wstęp - klasy i instancje: zaj03/klasy.md
+    - 🥕 Po co programować obiektowo?: zaj03/obiektowe_poco.md
+    - 🥕 Dziedziczenie: zaj03/dziedziczenie.md
+    - 🥕 Przeciążanie operatorów: zaj03/przeciazanie.md
+    - 🥕 Narzędzia introspekcji: zaj03/introspekcja.md
+    - 🥕 Atrybuty pseudoprywatne: zaj03/pseudoprywatne.md
+    - 🥕📝 Zadania cz. 1: zaj03/zadania1.md
+
