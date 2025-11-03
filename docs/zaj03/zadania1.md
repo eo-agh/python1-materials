@@ -72,26 +72,7 @@ __all__ = ["Employee", "Driver"]
 
 ### Przykładowe użycie
 
-Po zaimplementowaniu klas, poniższy kod powinien działać poprawnie:
-
-```python
-from python1course.zajecia04.personnel import Employee, Driver
-
-# Tworzenie instancji Employee
-emp1 = Employee("Jan", "Kowalski", 1, 5000.00)
-print(emp1)  # Wykorzystuje __str__
-emp1.display_info()
-emp1.update_salary(5500.00)
-
-# Tworzenie instancji Driver
-driver1 = Driver("Anna", "Nowak", 2, 6000.00, "LIC001", ["BLS", "ACLS"])
-print(driver1)  # Wykorzystuje __str__
-print(driver1.display_info())  # Zwraca string, nie wyświetla
-
-# Testowanie __repr__
-print(repr(emp1))
-print(repr(driver1))
-```
+Po zaimplementowaniu klas i odkomentowaniu kodu w `main_zajecia04.py`, plik ten powinien się uruchamiać bez błędów. Można też dodać swój kod, żeby zaprezentować działanie poszczególnych funkcjonalności.
 
 ### Uwagi
 
