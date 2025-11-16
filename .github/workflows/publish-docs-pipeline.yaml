@@ -3,7 +3,7 @@ name: Publish docs
 on:
   push:
     branches:
-      - zaj04
+      - zaj05
 
 permissions:
   contents: write
