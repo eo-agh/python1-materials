@@ -65,28 +65,28 @@ class IncidentQueue:
 
 Klasa `IncidentQueue` **nie dziedziczy** po `list`, ale **osadza** listę jako prywatny atrybut `__queue`. Aby zachowywać się jak lista, implementuje **magiczne metody (dunder methods)**, które Python wywołuje automatycznie przy określonych operacjach.
 
-??? + info "1. Dostęp do elementów"
+??? - info "1. Dostęp do elementów"
 
     Gdy piszemy `queue[0]`, Python automatycznie wywołuje `queue.__getitem__(0)`.
 
     Gdy piszemy `queue[0] = incident`, Python automatycznie wywołuje `queue.__setitem__(0, incident)`.
 
-??? + info "2. Iteracja"
+??? - info "2. Iteracja"
 
     Gdy piszemy `for incident in queue:`, Python:
 
     - Wywołuje `queue.__iter__()` aby uzyskać iterator,
     - W każdej iteracji wywołuje `__next__()` aż do `StopIteration`.
 
-??? + info "3. Sprawdzanie przynależności"
+??? - info "3. Sprawdzanie przynależności"
 
     Gdy piszemy `incident1 in queue`, Python wywołuje `queue.__contains__(incident1)`.
 
-??? + info "4. Długość"
+??? - info "4. Długość"
 
     Gdy piszemy `len(queue)`, Python wywołuje `queue.__len__()`.
 
-??? + info "5. Operatory arytmetyczne""
+??? - info "5. Operatory arytmetyczne""
 
     `__add__` - normalne dodawanie
 
@@ -105,19 +105,19 @@ Klasa `IncidentQueue` **nie dziedziczy** po `list`, ale **osadza** listę jako p
     - `queue + incident` → tworzy nową kolejkę (nie zmienia `queue`)
     - `queue += incident` → modyfikuje istniejącą kolejkę (zmienia `queue`)
 
-??? + info "6. Porównania"
+??? - info "6. Porównania"
 
     `__lt__` i `__gt__` odpowiednio wywoływane przez Pythona gdy `queue1 < queue2` i `queue1 > queue2`.
 
-??? + info "7. Konwersja na bool"
+??? - info "7. Konwersja na bool"
 
     Gdy piszemy `if queue:`, Python wywołuje `queue.__bool__()`, czyli sprawdza czy nasza kolejka jest pusta.
 
-??? + info "8. Wywołanie jako funkcja"
+??? - info "8. Wywołanie jako funkcja"
 
     `__call__` - dzięki temu możemy wyciągnąć instancję `Incident` o zadanym ID `queue(1)` zamiast implementować specjalnie chociażby `queue.find_by_id(1)`.
 
-??? + info "9. Reprezentacja tekstowa"
+??? - info "9. Reprezentacja tekstowa"
 
     `__str__` i `__repr__`
 
