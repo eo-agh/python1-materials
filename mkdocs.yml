@@ -73,3 +73,7 @@ nav:
     - 🦄 Abstrakcyjne klasy nadrzędne: zaj04/abstrakcyjne.md
     - 🦄 Rozszerzanie typów wbudowanych: zaj04/wbudowane.md
     - 🦄📝 Zadania cz. 2: zaj04/zadania2.md
+  - Zaawansowane konstrukcje w Pythonie:
+    - 🧩 Iteratory: zaj05/iteratory.md
+    - 🧩 Generatory: zaj05/generatory.md
+    - 🧩 Menadżery kontekstu: zaj05/menadzery_kontekstu.md
