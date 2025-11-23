@@ -100,25 +100,28 @@ import time
 with FileLock("data.txt"):
     with open("data.txt", "a") as f:
         f.write("Dane\n")
-    # Plik lock zostanie automatycznie usunięty
+    # Plik lock zostanie automatycznie usunięty po wyjściu z bloku with
 
-# Przykład 2: Z timeoutem
-try:
-    with FileLock("data.txt", timeout=5):
-        # Długotrwała operacja
-        time.sleep(10)
-except TimeoutError as e:
-    print(e)  # "Nie można uzyskać blokady pliku data.txt - timeout"
+# Przykład 2: Sprawdzenie czy lock został utworzony
+lock_path = Path("data.txt.lock")
+with FileLock("data.txt"):
+    print(f"Czy plik lock istnieje? {lock_path.exists()}")  # True
+    # Operacje na pliku
+print(f"Czy plik lock istnieje po wyjściu? {lock_path.exists()}")  # False
 
-# Przykład 3: Obsługa wyjątków
-try:
-    with FileLock("data.txt"):
-        with open("data.txt", "a") as f:
-            f.write("Dane\n")
-            raise ValueError("Błąd podczas zapisu!")
-except ValueError:
-    print("Wystąpił błąd, ale lock został zwolniony")
-    # Lock powinien być usunięty mimo wyjątku
+# Przykład 3: Timeout - jeśli plik jest już zablokowany
+# Sztucznie tworzymy plik lock, symulując sytuację gdy inny proces go trzyma:
+lock_file = Path("data.txt.lock")
+lock_file.touch()  # Tworzymy plik lock
+
+# Teraz próbujemy uzyskać lock - to spowoduje TimeoutError,
+# bo plik lock już istnieje i nie zostanie zwolniony w ciągu 2 sekund:
+with FileLock("data.txt", timeout=2):
+    # Ten kod się nie wykona, bo TimeoutError zostanie zgłoszony
+    pass
+
+# Pamiętaj, żeby usunąć sztucznie utworzony plik lock po teście:
+lock_file.unlink()
 ```
 
 **Wskazówki:**
