@@ -109,13 +109,16 @@ print(obiekt.nowa_metoda())  # Nowa metoda w klasie!
 
 Stwórz program, w którym zdefiniujesz dekorator oraz przedstawisz jego działanie.
 
-Ma to być dekorator, który zmierzy i wyświetli czas wykonania dekorowanej funkcji. Dekorator powinien przyjmować jeden argument, który określa jednostkę czasu (sekundy lub mikrosekundy) dla wyniku.
+Ma to być dekorator, który zmierzy i wyświetli czas wykonania dekorowanej funkcji lub metody. Dekorator powinien przyjmować jeden argument, który określa jednostkę czasu (sekundy lub mikrosekundy) dla wyniku.
 
 Wymagania:
 
 - Ma przyjmować argument o nazwie unit o wartości 'seconds' lub 'microseconds', określający jednostkę, w której ma być wyświetlony czas wykonania funkcji.
-- Ma mierzyć czas wykonania dekorowanej funkcji.
+- Ma mierzyć czas wykonania dekorowanej funkcji lub metody.
 - Ma wyświetlić czas wykonania funkcji w wybranej jednostce po zakończeniu jej wykonania.
+- Powinien działać zarówno z funkcjami jak i metodami klas (użyj `*args, **kwargs`).
+
+Użyj tego dekoratora także w metodach klasy z poprzedniego zadania.
 
 ???+ danger "Uwaga"
     Dekorator jak i funkcję przykładową umieść w `python1course/zaj06/dekorator.py`, kod wykonawczy w `main_zajecia06.py`.
