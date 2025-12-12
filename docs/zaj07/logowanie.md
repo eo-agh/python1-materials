@@ -1,109 +1,508 @@
-Logowanie to kluczowy element każdego programu, który pozwala na rejestrowanie zdarzeń zachodzących podczas jego działania. Może być używane do monitorowania aplikacji, diagnostyki błędów oraz zbierania informacji potrzebnych do analizy zachowania programu.
+# Logowanie w Pythonie
 
-Korzystanie z funkcji `print` do debugowania jest całkiem wygodne, jednak szybko może stać się niewystarczające w bardziej zaawansowanych projektach. Python dostarcza nam pakiet `logging`, który pozwala modyfikować podstawową konfigurację logowania, ale także budować własne `loggery`.
+Logowanie pozwala rejestrować zdarzenia podczas działania programu - do debugowania, monitorowania i analizy błędów.
 
-W logowaniu mamy poziomy (`DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`), które pozwalają określić priorytet i character komunikatu. W zależności od potrzeb, możliwe jest także określanie z jaką szczegółowością zapisywane są komunikaty.
+`print()` jest wygodny, ale nie skaluje się: brak poziomów ważności, brak zapisu do pliku, brak informacji skąd pochodzi komunikat. Biblioteka `logging` rozwiązuje te problemy.
 
-Dzięki logowaniu możemy przekazywać komunikaty nie tylko do konsoli, ale także zapisywać je bezpośrednio do pliku.
+## Poziomy logowania
+
+| Poziom | Wartość | Zastosowanie |
+|--------|---------|--------------|
+| `DEBUG` | 10 | Szczegółowe informacje diagnostyczne |
+| `INFO` | 20 | Potwierdzenie, że program działa poprawnie |
+| `WARNING` | 30 | Coś nieoczekiwanego, ale program działa |
+| `ERROR` | 40 | Poważny problem, funkcja nie mogła się wykonać |
+| `CRITICAL` | 50 | Krytyczny błąd, program może się zakończyć |
+
+Ustawiony poziom oznacza: loguj ten poziom i wszystkie wyższe.
+
+```python
+import logging
+
+logging.basicConfig(level=logging.WARNING)
+
+logging.debug("Nie zostanie wyświetlone")    # poziom 10 < 30
+logging.info("Nie zostanie wyświetlone")     # poziom 20 < 30
+logging.warning("Zostanie wyświetlone")      # poziom 30 >= 30
+logging.error("Zostanie wyświetlone")        # poziom 40 >= 30
+```
 
 ## Podstawowa konfiguracja
 
-Korzystanie z biblioteki `logging` jest bardzo proste, poniżej prosty skrypt:
+```python
+import logging
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+logging.debug("Aplikacja uruchomiona")
+logging.info("Połączono z bazą danych")
+logging.warning("Brak pliku konfiguracyjnego, używam domyślnych wartości")
+logging.error("Nie udało się zapisać do pliku")
+```
+
+Output:
+
+```
+2024-01-15 10:30:45,123 - DEBUG - Aplikacja uruchomiona
+2024-01-15 10:30:45,124 - INFO - Połączono z bazą danych
+2024-01-15 10:30:45,125 - WARNING - Brak pliku konfiguracyjnego, używam domyślnych wartości
+2024-01-15 10:30:45,126 - ERROR - Nie udało się zapisać do pliku
+```
+
+### Logowanie do pliku
 
 ```python
 import logging
 
-# Modyfikacja podstawowej konfiguracji
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    filename="app.log",
+    filemode="a",  # append (domyślnie) lub "w" (nadpisz)
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 
-# Zgłaszanie komunikatów na różnych poziomach
-logging.debug("Szczegółowy komunikat debug.")
-logging.info("Informacyjny komunikat.")
-logging.warning("Ostrzeżenie!")
-logging.error("Wystąpił błąd.")
-logging.critical("Błąd krytyczny!")
+logging.info("Start aplikacji")
+logging.error("Błąd połączenia z API")
 ```
 
-Skierowanie komunikatów do pliku:
+### Logowanie do konsoli i pliku jednocześnie
 
 ```python
 import logging
 
-logging.basicConfig(filename='app.log',
-                    filemode='w',
-                    level=logging.WARNING,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+# Konfiguracja root loggera
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler("app.log"),
+        logging.StreamHandler()
+    ]
+)
 
-logging.info("To nie zostanie zapisane, bo poziom jest zbyt niski.")
-logging.error("To zostanie zapisane w pliku.")
+logging.info("Ten komunikat trafi do konsoli i pliku")
 ```
 
-## Tworzenie własnych `loggerów`
+## Format komunikatów
 
-Tworzenie własnych loggerów pozwala na większą kontrolę nad procesem logowania w aplikacjach wielomodułowych. Dzięki temu można:
+Dostępne atrybuty w formacie:
 
-- Oddzielić logi różnych modułów – każdy moduł może mieć swojego loggera, co ułatwia debugowanie.
-- Zarządzać logowaniem niezależnie w każdym module – np. można ustawić inne poziomy logowania dla różnych części aplikacji.
-- Zapewnić czytelność i porządek – logi z każdego modułu są łatwe do odróżnienia dzięki nazwie loggera.
+| Atrybut | Opis |
+|---------|------|
+| `%(asctime)s` | Czas w formacie `YYYY-MM-DD HH:MM:SS,mmm` |
+| `%(name)s` | Nazwa loggera |
+| `%(levelname)s` | Poziom: DEBUG, INFO, WARNING, ERROR, CRITICAL |
+| `%(message)s` | Treść komunikatu |
+| `%(filename)s` | Nazwa pliku źródłowego |
+| `%(lineno)d` | Numer linii |
+| `%(funcName)s` | Nazwa funkcji |
+| `%(module)s` | Nazwa modułu |
 
-Dobrą praktyką jest przypisywanie `loggera` do każdego modułu, np. za pomocą:
+Przykład szczegółowego formatu:
 
 ```python
-from .utils import get_logger
+FORMAT = "%(asctime)s | %(name)s | %(levelname)-8s | %(filename)s:%(lineno)d | %(message)s"
 
-_logger = get_logger(__name__)
+logging.basicConfig(level=logging.DEBUG, format=FORMAT)
 ```
 
-Tylko oczywiście konieczna jest implementacja takiej funkcji, np. w module `utils`:
+Output:
+
+```
+2024-01-15 10:30:45,123 | root | DEBUG    | main.py:15 | Szczegółowy komunikat
+```
+
+## Loggery, Handlery, Formattery
+
+Architektura logowania w Pythonie:
+
+```
+Logger (tworzy komunikaty)
+   │
+   ├── Handler 1 (StreamHandler → konsola)
+   │      └── Formatter
+   │
+   └── Handler 2 (FileHandler → plik)
+          └── Formatter
+```
+
+### Tworzenie loggera z handlerami
 
 ```python
+import logging
+
+# 1. Tworzenie loggera
+logger = logging.getLogger("myapp")
+logger.setLevel(logging.DEBUG)
+
+# 2. Tworzenie formattera
+formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+
+# 3. Handler do konsoli
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)  # INFO i wyższe do konsoli
+console_handler.setFormatter(formatter)
+
+# 4. Handler do pliku
+file_handler = logging.FileHandler("app.log")
+file_handler.setLevel(logging.ERROR)  # tylko ERROR i CRITICAL do pliku
+file_handler.setFormatter(formatter)
+
+# 5. Dodanie handlerów do loggera
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
+
+# Użycie
+logger.debug("Nie wyświetli się nigdzie (poziom loggera DEBUG, ale handlery mają wyższe)")
+logger.info("Tylko konsola")
+logger.error("Konsola i plik")
+```
+
+### Rotacja plików logów
+
+Dla długo działających aplikacji — automatyczne tworzenie nowych plików:
+
+```python
+from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
+
+# Rotacja po rozmiarze (max 5MB, max 3 pliki backup)
+handler = RotatingFileHandler(
+    "app.log",
+    maxBytes=5*1024*1024,  # 5 MB
+    backupCount=3
+)
+
+# Rotacja po czasie (nowy plik co dzień, max 7 dni)
+handler = TimedRotatingFileHandler(
+    "app.log",
+    when="midnight",
+    interval=1,
+    backupCount=7
+)
+```
+
+## Logger per moduł
+
+**Dobra praktyka**: każdy moduł ma własny logger o nazwie `__name__`.
+
+```python
+# myapp/database.py
+import logging
+
+logger = logging.getLogger(__name__)  # logger o nazwie "myapp.database"
+
+def connect():
+    logger.info("Łączenie z bazą danych...")
+    try:
+        # ...
+        logger.debug("Połączenie nawiązane")
+    except Exception as e:
+        logger.error(f"Błąd połączenia: {e}")
+        raise
+```
+
+```python
+# myapp/api.py
+import logging
+
+logger = logging.getLogger(__name__)  # logger o nazwie "myapp.api"
+
+def fetch_data(url):
+    logger.info(f"Pobieranie danych z {url}")
+    # ...
+```
+
+```python
+# main.py
+import logging
+from myapp import database, api
+
+# Konfiguracja w głównym pliku
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+
+database.connect()
+api.fetch_data("https://api.example.com")
+```
+
+Output:
+
+```
+2024-01-15 10:30:45 - myapp.database - INFO - Łączenie z bazą danych...
+2024-01-15 10:30:45 - myapp.database - DEBUG - Połączenie nawiązane
+2024-01-15 10:30:46 - myapp.api - INFO - Pobieranie danych z https://api.example.com
+```
+
+## Hierarchia loggerów
+
+Loggery tworzą hierarchię opartą na nazwach (separator: `.`):
+
+```
+root
+├── myapp
+│   ├── myapp.database
+│   └── myapp.api
+└── urllib3
+```
+
+Komunikaty propagują w górę — jeśli `myapp.database` nie ma handlerów, użyje handlerów z `myapp` lub `root`.
+
+```python
+# Wyłączenie propagacji
+logger = logging.getLogger("myapp.database")
+logger.propagate = False  # Nie przekazuj do loggerów nadrzędnych
+```
+
+## Konfiguracja przez słownik (dictConfig)
+
+Dla większych projektów — konfiguracja w jednym miejscu:
+
+```python
+import logging.config
+
+LOGGING_CONFIG = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    
+    "formatters": {
+        "standard": {
+            "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        },
+        "detailed": {
+            "format": "%(asctime)s - %(name)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s"
+        }
+    },
+    
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "INFO",
+            "formatter": "standard",
+            "stream": "ext://sys.stdout"
+        },
+        "file": {
+            "class": "logging.FileHandler",
+            "level": "ERROR",
+            "formatter": "detailed",
+            "filename": "errors.log",
+            "mode": "a"
+        }
+    },
+    
+    "loggers": {
+        "myapp": {
+            "level": "DEBUG",
+            "handlers": ["console", "file"],
+            "propagate": False
+        }
+    },
+    
+    "root": {
+        "level": "WARNING",
+        "handlers": ["console"]
+    }
+}
+
+logging.config.dictConfig(LOGGING_CONFIG)
+
+# Użycie
+logger = logging.getLogger("myapp")
+logger.info("Aplikacja uruchomiona")
+```
+
+## Logowanie wyjątków
+
+```python
+import logging
+
+logger = logging.getLogger(__name__)
+
+def divide(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        logger.exception("Błąd dzielenia")  # automatycznie dołącza traceback
+        raise
+
+# Alternatywnie
+try:
+    result = divide(10, 0)
+except ZeroDivisionError:
+    logger.error("Dzielenie nie powiodło się", exc_info=True)
+```
+
+Output:
+
+```
+2024-01-15 10:30:45 - __main__ - ERROR - Błąd dzielenia
+Traceback (most recent call last):
+  File "main.py", line 7, in divide
+    return a / b
+ZeroDivisionError: division by zero
+```
+
+## Fabryka loggerów
+
+Pomocnicza funkcja do tworzenia skonfigurowanych loggerów:
+
+```python
+# myapp/utils/logging.py
 import logging
 from pathlib import Path
+from datetime import datetime
 
 def get_logger(
     name: str,
-    log_level: int | str = logging.INFO,
-    log_file: Path = Path("application.log")
+    level: int = logging.INFO,
+    log_dir: Path = Path("logs")
 ) -> logging.Logger:
-    """Builds a `Logger` instance with provided name and log levels for stream and file.
-
-    Args:
-        name: The name for the logger.
-        log_level: The default log level for the logger.
-        log_file: Path to the file where logs should be saved.
-
-    Returns:
-        The logger.
-
-    """
+    """Tworzy skonfigurowany logger z handlerami do konsoli i pliku."""
+    
     logger = logging.getLogger(name)
-    logger.setLevel(log_level)
-
-    # Avoid adding multiple handlers if the logger already has them
-    if not logger.handlers:
-        # Formatter for both handlers
-        formatter = logging.Formatter(
-            fmt="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-        )
-
-        # Stream handler
-        stream_handler = logging.StreamHandler()
-        stream_handler.setLevel(logging.INFO)  # Set level for stream
-        stream_handler.setFormatter(formatter)
-        logger.addHandler(stream_handler)
-
-        # File handler
-        file_handler = logging.FileHandler(log_file, mode="a")
-        file_handler.setLevel(logging.ERROR)  # Set level for file
-        file_handler.setFormatter(formatter)
-        logger.addHandler(file_handler)
-
+    
+    # Unikaj duplikowania handlerów
+    if logger.handlers:
+        return logger
+    
+    logger.setLevel(level)
+    
+    formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
+    
+    # Handler konsoli
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+    
+    # Handler pliku
+    log_dir.mkdir(exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d")
+    file_handler = logging.FileHandler(
+        log_dir / f"app_{timestamp}.log",
+        encoding="utf-8"
+    )
+    file_handler.setLevel(logging.DEBUG)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+    
     return logger
+```
+
+Użycie w modułach:
+
+```python
+# myapp/database.py
+from myapp.utils.logging import get_logger
+
+logger = get_logger(__name__)
+
+def connect():
+    logger.info("Łączenie z bazą...")
+```
+
+## Dobre praktyki
+
+### 1. Używaj `__name__` jako nazwy loggera
+
+```python
+# ✅ Dobrze
+logger = logging.getLogger(__name__)
+
+# ❌ Źle
+logger = logging.getLogger("my_logger")
+```
+
+### 2. Konfiguruj logowanie raz, w głównym pliku
+
+Z tego korzystamy jedynie jak nie mamy swojej funkcji `get_logger()`.
+
+```python
+# main.py - tutaj konfiguracja
+logging.basicConfig(...)
+
+# inne moduły - tylko tworzenie loggera
+logger = logging.getLogger(__name__)
+```
+
+### 3. Używaj odpowiednich poziomów
+
+```python
+# ❌ Źle - wszystko jako INFO
+logger.info("Start")
+logger.info("Błąd połączenia!")
+logger.info("Szczegóły debugowania...")
+
+# ✅ Dobrze - odpowiednie poziomy
+logger.info("Start aplikacji")
+logger.error("Błąd połączenia z bazą danych")
+logger.debug("Parametry połączenia: host=localhost, port=5432")
+```
+
+### 4. Loguj wartości, nie tylko komunikaty
+
+```python
+# ❌ Źle
+logger.error("Błąd")
+
+# ✅ Dobrze
+logger.error(f"Błąd połączenia z {host}:{port} - {error}")
+```
+
+### 5. Używaj `logger.exception()` w blokach except
+
+```python
+try:
+    risky_operation()
+except Exception:
+    logger.exception("Operacja nie powiodła się")  # dołącza traceback
+```
+
+### 6. Nie loguj wrażliwych danych
+
+```python
+# ❌ Źle
+logger.info(f"Logowanie użytkownika {username}, hasło: {password}")
+
+# ✅ Dobrze
+logger.info(f"Logowanie użytkownika {username}")
 ```
 
 ## 📝 Zadania
 
-1. W pliku `./src/zajecia07/utils/logging.py` zapoznaj się z funkcją `get_logger` do tworzenia własnych loggerów.
-2. Rozbuduj funkcję `get_logger` o logowanie do pliku, funkcja ma posiadać dodatkowy parametr `log_file` (typ `pathlib.Path`, domyślnie logi mają się zapisywać w plikach `./logs/logs_{timestamp}.log`).
-2. Zaprezentuj działanie tej funkcji wykorzystujać `_logger = get_logger(...)` w co najmniej 2 modułach logując informacje na różnych poziomach.
+1. Skonfiguruj logowanie w aplikacji kina (`CinemaHall`):
+    - Logi `INFO` i wyższe do konsoli,
+    - Logi `DEBUG` i wyższe do pliku `logs/cinema.log`,
+    - Format: `%(asctime)s - %(name)s - %(levelname)s - %(message)s`.
+
+2. Dodaj logowanie do metod `reserve()` i `cancel()`:
+    - `DEBUG`: szczegóły operacji (miejsce, użytkownik),
+    - `INFO`: potwierdzenie sukcesu,
+    - `WARNING`: próba rezerwacji zajętego miejsca,
+    - `ERROR`: nieudana operacja z komunikatem błędu.
+
+3. Stwórz funkcję `get_logger()` w module `python1course/zaj07/utils/logging.py`:
+    - Parametry: `name`, `level`, `log_dir`,
+    - Zwraca skonfigurowany logger z handlerami do konsoli i pliku,
+    - Pliki logów z datą w nazwie: `app_YYYYMMDD.log`.
+
+4. Użyj `get_logger(__name__)` w co najmniej 2 modułach i zaprezentuj działanie.
+
+???+ tip "Struktura plików"
+    ```
+    python1course/zaj07/
+    ├── utils/
+    │   ├── __init__.py
+    │   └── logging.py      # funkcja get_logger()
+    ├── cinema.py           # CinemaHall z logowaniem
+    └── logs/
+        └── app_20240115.log
+    ```

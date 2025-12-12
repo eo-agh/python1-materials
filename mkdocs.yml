@@ -80,3 +80,6 @@ nav:
   - Pozostałe elementy języka:
     - 🤖 Obsługa wyjątków: zaj06/wyjatki.md
     - 🤖 Dekoratory: zaj06/dekoratory.md
+  - Inżynieria oprogramowania:
+    - 🛠️ Testy: zaj07/testy.md
+    - 🛠️ Logowanie: zaj07/logowanie.md

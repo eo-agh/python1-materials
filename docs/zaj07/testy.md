@@ -1,347 +1,528 @@
-Mam nadzieję, że nie muszę mówić, że testowanie oprogramowania jest kluczowym elementem jakiegokolwiek procesu tworzenia aplikacji. Dzięki temu, możemy się upewnić, że kod działa poprawnie, jest odporny na błędy i spełnia wymagania funkcjonalne. Do tego przy rozwijaniu aplikacji mamy pewność, że zachowujemy wszystkie działające poprzednio elementy.
+# Testowanie w Pythonie
 
-W Pythonie zwykle do testowania używa się pakietu `pytest` - zaawansowane funkcje, parametryzacja, wspiera testy w stylu funkcjonalnym i obiektowym, ale funkcjonują także inne: `unittest` - wbudowany w Pythona, podstawowe testowanie, `mock` - pozwala na tworzenie obiektów zastępczych, `tox` - umożliwia testowanie w wielu środowiskach.
+Testowanie pozwala upewnić się, że kod działa poprawnie, że nowe zmiany nie psują istniejących funkcjonalności.
+
+W Pythonie standardem jest `pytest` - oferuje parametryzację, fixtures, czytelne asercje i bogaty ekosystem pluginów.
+
+## Szybki start z pytest
+
+```bash
+# Instalacja
+conda install pytest
+
+# Uruchomienie testów
+pytest                      # wszystkie testy
+pytest tests/unit/          # tylko folder
+pytest tests/test_math.py   # tylko plik
+pytest -v                   # szczegółowy output
+pytest -x                   # zatrzymaj po pierwszym błędzie
+pytest -k "add"             # tylko testy zawierające "add" w nazwie
+```
 
 ## Rodzaje testów
 
-Testy można podzielić na kilka kategorii w zależności od celu, który mają spełniać, oraz poziomu aplikacji, na którym działają.
-
 ### Testy jednostkowe (unit tests)
 
-**Cel** - sprawdzanie działania najmniejszych jednostek kodu, takich jak funkcje, metody czy klasy, w izolacji od reszty aplikacji.
-
-**Charakterystyka**:
-
-- Skupiają się na jednej funkcjonalności w oderwaniu od innych części systemu.
-- Nie wymagają dostępu do baz danych, API, czy zewnętrznych zasobów.
-- Są szybkie w uruchamianiu.
+Testują pojedyncze funkcje/metody w izolacji. Szybkie, bez zewnętrznych zależności.
 
 ```python
-# Funkcja do testowania
 def add(a, b):
     return a + b
 
-# Test jednostkowy
 def test_add():
     assert add(2, 3) == 5
     assert add(-1, 1) == 0
-    assert add(0, 0) == 0
 ```
 
 ### Testy integracyjne (integration tests)
 
-**Cel** - weryfikacja, czy różne moduły aplikacji współpracują ze sobą poprawnie.
-
-**Charakterystyka**:
-
-- Obejmują interakcje między komponentami, np. komunikację z bazą danych czy integrację z API.
-- Mogą być wolniejsze niż testy jednostkowe, ponieważ wymagają dostępu do zasobów zewnętrznych.
+Weryfikują współpracę między modułami (np. z bazą danych).
 
 ```python
-# Funkcja zapisująca dane do bazy
-def save_to_database(data, db_connection):
-    cursor = db_connection.cursor()
-    cursor.execute("INSERT INTO table_name (column) VALUES (?)", (data,))
-    db_connection.commit()
+import sqlite3
 
-# Test integracyjny
-def test_save_to_database():
-    db_connection = sqlite3.connect(":memory:")  # Tworzenie testowej bazy danych
-    save_to_database("test_data", db_connection)
-    cursor = db_connection.cursor()
-    cursor.execute("SELECT column FROM table_name")
-    result = cursor.fetchone()
-    assert result == ("test_data",)
+def test_save_and_retrieve():
+    conn = sqlite3.connect(":memory:")
+    conn.execute("CREATE TABLE users (name TEXT)")
+    conn.execute("INSERT INTO users VALUES (?)", ("Jan",))
+    
+    result = conn.execute("SELECT name FROM users").fetchone()
+    assert result[0] == "Jan"
 ```
 
-### Testy e2e (end-to-end tests)
+### Testy e2e (end-to-end)
 
-**Cel** - sprawdzenie całego procesu użytkownika w aplikacji, od wejścia do wyjścia, wraz z interakcją między różnymi komponentami, takimi jak bazy danych, API, czy frontend i backend.
-
-**Charakterystyka**:
-
-- Testują aplikację jako całość, w pełnym środowisku, jak użytkownik końcowy.
-- Obejmują wszystkie warstwy systemu (UI, backend, bazy danych, integracje zewnętrzne).
-- Wymagają skonfigurowanego środowiska produkcyjnego lub stagingowego.
-- Są czasochłonne, ponieważ uruchamiają całą aplikację.
-- Wymagają częstych aktualizacji w miarę zmieniających się funkcjonalności systemu.
+Testują całą aplikację z perspektywy użytkownika.
 
 ```python
-# Przykład z użyciem Selenium do automatyzacji przeglądarki
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-import time
-
-def test_purchase_workflow():
-    # Uruchomienie przeglądarki
-    driver = webdriver.Chrome()
-
-    try:
-        # 1. Otwórz stronę główną
-        driver.get("https://example.com")
-
-        # 2. Wyszukaj product
-        search_box = driver.find_element(By.NAME, "search")
-        search_box.send_keys("Laptop")
-        search_box.send_keys(Keys.RETURN)
-
-        time.sleep(2)  # Poczekaj na załadowanie wyników
-
-        # 3. Dodaj product do koszyka
-        add_to_cart_button = driver.find_element(By.CSS_SELECTOR, ".add-to-cart")
-        add_to_cart_button.click()
-
-        time.sleep(2)
-
-        # 4. Przejdź do koszyka i dokonaj zakupu
-        driver.get("https://example.com/cart")
-        checkout_button = driver.find_element(By.ID, "checkout")
-        checkout_button.click()
-
-        # 5. Sprawdź, czy zakup zakończył się sukcesem
-        success_message = driver.find_element(By.CLASS_NAME, "success")
-        assert "Zakup zakończony pomyślnie" in success_message.text
-
-    finally:
-        # Zamknięcie przeglądarki
-        driver.quit()
+def test_full_reservation_workflow():
+    hall = CinemaHall(rows=2, seats_per_row=3)
+    
+    # Użytkownik rezerwuje miejsce
+    hall.reserve("A1", "Jan Kowalski")
+    
+    # Próba rezerwacji zajętego miejsca
+    with pytest.raises(SeatOccupiedError):
+        hall.reserve("A1", "Anna Nowak")
+    
+    # Anulowanie i ponowna rezerwacja
+    hall.cancel("A1", "Jan Kowalski")
+    hall.reserve("A1", "Anna Nowak")
+    
+    assert hall.get_reservation("A1") == "Anna Nowak"
 ```
 
-### Inne
+??? note "Inne rodzaje testów"
+    - **Testy regresyjne** - sprawdzają, czy nowe zmiany nie zepsuły istniejących funkcjonalności
+    - **Testy smoke** - szybkie testy czy aplikacja w ogóle działa
+    - **Testy wydajnościowe** - mierzą czas odpowiedzi i zużycie zasobów
+    - **Testy bezpieczeństwa** - szukają luk (SQL Injection, XSS)
 
-??? - "Testy funkcjonalne (functional tests)"
-    **Cel** - testowanie aplikacji z punktu widzenia użytkownika końcowego.
+## Asercje w pytest
 
-    **Charakterystyka**:
+```python
+def test_assertions():
+    # Równość
+    assert result == expected
+    assert result != other
+    
+    # Prawdziwość
+    assert condition
+    assert not condition
+    
+    # Zawieranie
+    assert item in collection
+    assert "substring" in text
+    
+    # Typy
+    assert isinstance(obj, MyClass)
+    
+    # Przybliżone porównania (float)
+    assert result == pytest.approx(3.14, rel=1e-2)
+    
+    # Porównania
+    assert value > 0
+    assert 0 <= value <= 100
+```
 
-    - Sprawdzają pełne scenariusze działania aplikacji.
-        - Mogą obejmować interfejs użytkownika (np. testowanie przeglądarki) lub operacje backendowe.
-        - Wymagają uruchomienia pełnego środowiska aplikacji.
+## Testowanie wyjątków
 
-    ```python
-    def test_user_registration(client):
-        response = client.post("/register", data={"username": "test", "password": "pass"})
-        assert response.status_code == 200
-        assert b"Registration successful" in response.data
-    ```
+```python
+import pytest
 
-??? - "Testy systemowe (system tests)"
-    **Cel** - testowanie aplikacji jako całości w środowisku jak najbardziej zbliżonym do produkcyjnego.
+def divide(a, b):
+    if b == 0:
+        raise ValueError("Nie można dzielić przez zero")
+    return a / b
 
-    **Charakterystyka**:
+def test_divide_by_zero():
+    with pytest.raises(ValueError) as exc_info:
+        divide(10, 0)
+    
+    assert "zero" in str(exc_info.value)
 
-    - Obejmują wszystkie komponenty systemu, takie jak serwery, bazy danych i API.
-    - Są najdroższe w utrzymaniu i najwolniejsze, ale dają pełen obraz działania systemu.
+def test_divide_by_zero_simple():
+    with pytest.raises(ValueError):
+        divide(10, 0)
 
-??? - "Testy regresjyjne (regression tests)"
-    **Cel** - upewnienie się, że now zmiany w kodzie nie spowodowały błędów w działających wcześniej funkcjonalnościach.
+# Testowanie konkretnego komunikatu
+def test_divide_by_zero_match():
+    with pytest.raises(ValueError, match="zero"):
+        divide(10, 0)
+```
 
-    **Charakterystyka**:
+## Parametryzacja testów
 
-    - Oparte na istniejących testach jednostkowych, integracyjnych i funkcjonalnych.
-    - Automatyzowane w ramach Continuous Integration (CI).
+Zamiast pisać wiele podobnych testów, używamy `@pytest.mark.parametrize`:
 
-??? - "Testy akceptacyjne (acceptance tests)"
-    **Cel** - sprawdzanie, czy aplikacja spełnia wymagania biznesowe i jest gotowa do użycia.
+```python
+import pytest
 
-    **Charakterystyka**:
+@pytest.mark.parametrize("a, b, expected", [
+    (2, 3, 5),
+    (-1, 1, 0),
+    (0, 0, 0),
+    (100, -50, 50),
+])
+def test_add(a, b, expected):
+    assert add(a, b) == expected
 
-    - Prowadzone na podstawie scenariuszy dostarczonych przez klienta lub zespół produktowy.
-    - Mogą być przeprowadzane ręcznie lub automatycznie.
+# Parametryzacja z ID dla czytelności
+@pytest.mark.parametrize("seat, user, should_raise", [
+    ("A1", "Jan Kowalski", False),
+    ("Z99", "Anna Nowak", True),  # nieprawidłowe miejsce
+], ids=["valid_seat", "invalid_seat"])
+def test_reserve(seat, user, should_raise):
+    hall = CinemaHall()
+    if should_raise:
+        with pytest.raises(InvalidSeatError):
+            hall.reserve(seat, user)
+    else:
+        hall.reserve(seat, user)
+        assert hall.get_reservation(seat) == user
+```
 
-    ```python
-    def test_shopping_cart_workflow(client):
-        client.post("/add_to_cart", data={"product_id": 1})
-        client.post("/add_to_cart", data={"product_id": 2})
-        response = client.get("/cart")
-        assert "product_id: 1" in response.data
-        assert "product_id: 2" in response.data
-    ```
+## Fixtures
 
-??? - "Testy wydajnościowe (performance tests)"
-    **Cel** - ocena, jak szybko działa aplikacja przy określonym obciążeniu.
+Fixtures to funkcje przygotowujące dane lub zasoby dla testów.
 
-    **Charakterystyka**:
+### Podstawowe użycie
 
-    - Sprawdzają czas odpowiedzi, zużycie zasobów i zdolność do obsługi dużej liczby równoczesnych użytkowników.
+```python
+import pytest
 
-??? - "Testy bezpieczeństwa (security tests)"
-    **Cel** - znalezienie potencjalnych luk w zabezpieczeniach aplikacji.
+@pytest.fixture
+def cinema_hall():
+    """Tworzy salę kinową 3x3 do testów."""
+    return CinemaHall(rows=3, seats_per_row=3)
 
-    **Charakterystyka**:
+def test_reserve_seat(cinema_hall):
+    cinema_hall.reserve("A1", "Jan Kowalski")
+    assert cinema_hall.get_reservation("A1") == "Jan Kowalski"
 
-    - Sprawdzają, czy aplikacja jest odporna na ataki typu SQL Injection, Cross-Site Scripting (XSS) itp.
+def test_hall_capacity(cinema_hall):
+    assert cinema_hall.total_seats == 9
+```
 
-    ```python
-    def test_sql_injection(client):
-        response = client.get("/search", query_string={"q": "' OR 1=1; --"})
-        assert b"Unexpected error" not in response.data
-    ```
+### Fixture z setup i teardown (yield)
 
-??? - "Testy eksploracyjne (exploratory tests)"
-    **Cel** - ręczne testowanie aplikacji w celu znalezienia nieoczekiwanych błędów.
+```python
+@pytest.fixture
+def database():
+    # Setup
+    conn = sqlite3.connect(":memory:")
+    conn.execute("CREATE TABLE users (id INTEGER, name TEXT)")
+    
+    yield conn  # Tu test się wykonuje
+    
+    # Teardown
+    conn.close()
 
-    **Charakterystyka**:
+def test_insert_user(database):
+    database.execute("INSERT INTO users VALUES (1, 'Jan')")
+    result = database.execute("SELECT name FROM users").fetchone()
+    assert result[0] == "Jan"
+```
 
-    - Wykonywane przez doświadczonych testerów bez szczegółowych scenariuszy.
-    - Koncentrują się na eksploracji aplikacji i szukaniu niestandardowych scenariuszy.
+### Scope fixtures
 
-??? - "Testy smoke (smoke tests)"
-    **Cel** - upewnienie się, że najważniejsze funkcjonalności działają po wdrożeniu lub aktualizacji aplikacji.
+```python
+@pytest.fixture(scope="function")  # domyślny - nowa instancja dla każdego testu
+def fresh_hall():
+    return CinemaHall()
 
-    **Charakterystyka**:
+@pytest.fixture(scope="module")  # jedna instancja dla całego modułu
+def shared_config():
+    return load_config()
 
-    - Szybkie, podstawowe testy wykonywane przed szczegółowymi testami.
+@pytest.fixture(scope="session")  # jedna instancja dla całej sesji testów
+def database_connection():
+    return create_connection()
+```
 
-    ```python
-    def test_app_up(client):
-        response = client.get("/")
-        assert response.status_code == 200
-    ```
+### Plik `conftest.py`
+
+Fixtures zdefiniowane w `conftest.py` są dostępne dla wszystkich testów w danym folderze i podfolderach.
+
+```python
+# tests/conftest.py
+import pytest
+
+@pytest.fixture
+def sample_user():
+    return {"name": "Jan", "email": "jan@example.com"}
+
+@pytest.fixture
+def cinema_hall():
+    return CinemaHall(rows=5, seats_per_row=10)
+```
+
+Użycie fixtures w testach:
+
+```python
+# tests/unit/test_cinema.py
+import pytest
+
+def test_reserve_seat(cinema_hall, sample_user):
+    """Test używa fixtures z conftest.py - nie trzeba ich importować."""
+    cinema_hall.reserve("A1", sample_user["name"])
+    assert cinema_hall.get_reservation("A1") == sample_user["name"]
+
+def test_hall_capacity(cinema_hall):
+    """Każdy test może używać tylko potrzebnych fixtures."""
+    assert cinema_hall.total_seats == 50
+```
+
+## Markery
+
+Markery pozwalają kategoryzować i kontrolować wykonanie testów.
+
+```python
+import pytest
+
+# Pomijanie testu
+@pytest.mark.skip(reason="Funkcjonalność w trakcie implementacji")
+def test_future_feature():
+    pass
+
+# Warunkowe pomijanie
+@pytest.mark.skipif(sys.platform == "win32", reason="Nie działa na Windows")
+def test_unix_only():
+    pass
+
+# Oczekiwany błąd
+@pytest.mark.xfail(reason="Znany bug #123")
+def test_known_bug():
+    assert broken_function() == expected
+
+# Własne markery
+@pytest.mark.slow
+def test_heavy_computation():
+    pass
+
+# Uruchomienie: pytest -m "not slow"
+```
+
+Rejestracja własnych markerów w `pytest.ini`:
+
+```ini
+[pytest]
+markers =
+    slow: marks tests as slow
+    integration: marks tests as integration tests
+```
+
+## Mockowanie
+
+Mockowanie zastępuje rzeczywiste zależności sztucznymi obiektami.
+
+### Podstawowy mock
+
+```python
+from unittest.mock import MagicMock, patch
+
+def test_with_mock():
+    # Tworzenie mocka
+    mock_db = MagicMock()
+    mock_db.get_user.return_value = {"name": "Jan"}
+    
+    # Użycie
+    result = mock_db.get_user(1)
+    
+    # Weryfikacja
+    assert result["name"] == "Jan"
+    mock_db.get_user.assert_called_once_with(1)
+```
+
+### Patchowanie (podmiana w runtime)
+
+```python
+from unittest.mock import patch
+
+# Jako dekorator
+@patch("myapp.services.requests.get")
+def test_api_call(mock_get):
+    mock_get.return_value.json.return_value = {"status": "ok"}
+    
+    result = fetch_status()
+    
+    assert result == "ok"
+    mock_get.assert_called_once()
+
+# Jako context manager
+def test_api_call_v2():
+    with patch("myapp.services.requests.get") as mock_get:
+        mock_get.return_value.status_code = 200
+        
+        result = check_health()
+        
+        assert result is True
+```
+
+### Mock z pytest-mock (czystszy syntax)
+
+```python
+def test_with_mocker(mocker):
+    mock_get = mocker.patch("myapp.api.requests.get")
+    mock_get.return_value.json.return_value = {"data": "test"}
+    
+    result = get_data()
+    
+    assert result == {"data": "test"}
+```
+
+## Pokrycie kodu (coverage)
+
+```bash
+# Instalacja
+pip install pytest-cov
+
+# Uruchomienie z coverage
+pytest --cov=myapp tests/
+
+# Raport HTML
+pytest --cov=myapp --cov-report=html tests/
+
+# Minimalne pokrycie (fail jeśli poniżej)
+pytest --cov=myapp --cov-fail-under=80 tests/
+```
+
+Przykładowy output:
+
+```
+---------- coverage: platform linux, python 3.11 ----------
+Name                    Stmts   Miss  Cover
+-------------------------------------------
+myapp/__init__.py           2      0   100%
+myapp/cinema.py            45      3    93%
+myapp/exceptions.py        12      0   100%
+-------------------------------------------
+TOTAL                      59      3    95%
+```
+
+## Wzorzec AAA (Arrange-Act-Assert)
+
+Każdy test powinien mieć trzy wyraźne sekcje:
+
+```python
+def test_reserve_seat():
+    # Arrange - przygotowanie danych
+    hall = CinemaHall(rows=3, seats_per_row=3)
+    user = "Jan Kowalski"
+    seat = "A1"
+    
+    # Act - wykonanie akcji
+    hall.reserve(seat, user)
+    
+    # Assert - sprawdzenie wyniku
+    assert hall.get_reservation(seat) == user
+    assert hall.available_seats == 8
+```
+
+## Dobre praktyki
+
+### Nazewnictwo testów
+
+```python
+# ❌ Źle
+def test_1():
+def test_function():
+
+# ✅ Dobrze - opisuje co testujemy i oczekiwany wynik
+def test_reserve_valid_seat_succeeds():
+def test_reserve_occupied_seat_raises_error():
+def test_cancel_with_wrong_user_raises_error():
+```
+
+### Izolacja testów
+
+```python
+# ❌ Źle - testy zależą od siebie
+hall = CinemaHall()
+
+def test_reserve():
+    hall.reserve("A1", "Jan")
+
+def test_cancel():
+    hall.cancel("A1", "Jan")  # Zależy od test_reserve!
+
+# ✅ Dobrze - każdy test niezależny
+def test_reserve():
+    hall = CinemaHall()
+    hall.reserve("A1", "Jan")
+    assert hall.get_reservation("A1") == "Jan"
+
+def test_cancel():
+    hall = CinemaHall()
+    hall.reserve("A1", "Jan")  # Setup w teście
+    hall.cancel("A1", "Jan")
+    assert hall.get_reservation("A1") is None
+```
+
+### Jeden test = jedna rzecz
+
+```python
+# ❌ Źle - testuje zbyt wiele
+def test_cinema_hall():
+    hall = CinemaHall()
+    hall.reserve("A1", "Jan")
+    assert hall.get_reservation("A1") == "Jan"
+    hall.cancel("A1", "Jan")
+    assert hall.get_reservation("A1") is None
+    with pytest.raises(SeatOccupiedError):
+        hall.reserve("A1", "Anna")
+        hall.reserve("A1", "Piotr")
+
+# ✅ Dobrze - osobne testy
+def test_reserve_seat():
+    ...
+
+def test_cancel_reservation():
+    ...
+
+def test_reserve_occupied_seat_raises():
+    ...
+```
 
 ## Organizacja testów w repozytorium
 
-Jest to kluczowe dla utrzymania czytelności, łatwości utrzymania oraz szybkiego znajdowania odpowiednich przypadków testowych.
-
-- **Dedykowany folder dla testów**
-
-Testy powinny znajdować się w oddzielnym folderze, zwykle nazwanym `tests`, znajdującym się w głównym katalogu projektu.
-
-- **Podfoldery odzwierciedlające rodzaje testów**
-
-Podfoldery tworzone są zwykle według typu testów, czyli np. `unit` – dla testów jednostkowych, `integration` – dla testów integracyjnych i `e2e` – dla testów end-to-end.
-
-- **Struktura testów odzwierciedlająca strukturę pakietów**
-
-Kolejne podfoldery powinny odzwierciedlać strukturę pakietów, które testujemy.
-
-```markdown
-moj_projekt/tests
-├── unit/
-    ├── zajecia06/
-        ├── test_module1.py
-        ├── test_module2.py
-        ├── moj_subpakiet/
-            ├── test_submodule.py
+```
+projekt/
+├── src/
+│   └── myapp/
+│       ├── __init__.py
+│       ├── cinema.py
+│       └── exceptions.py
+├── tests/
+│   ├── conftest.py          # Współdzielone fixtures
+│   ├── unit/
+│   │   ├── test_cinema.py
+│   │   └── test_exceptions.py
+│   ├── integration/
+│   │   └── test_database.py
+│   └── e2e/
+│       └── test_workflows.py
+├── pytest.ini
+└── pyproject.toml
 ```
 
-- **Nazwy plików i testów**
+Przykładowy `pytest.ini`:
 
-Wszystkie pliki testowe powinny zaczynać się od `test_` lub kończyć na `_test.py` (przykład powyżej).
-
-Nazwy funkcji testowych powinny zaczynać się od `test_`.
-
-```python
-def test_add_function():
-    assert add(2, 3) == 5
-```
-
-## Organizacja zależności i konfiguracja testów
-
-**Plik `conftest.py`**
-
-W frameworku `pytest` pozwala centralizować konfigurację i współdzielone zależności testów. Jest to miejsce, gdzie można definiować:
-
-- Fixtures – funkcje tworzące dane testowe lub konfiguracje.
-- Funkcje pomocnicze – wspólne dla wielu testów.
-- Konfiguracje specyficzne dla pytest.
-
-Zwykle plik znajduje się w `./tests/conftest.py`.
-
-```python
-# Definiowanie fixtures w conftest.py
-import pytest
-
-@pytest.fixture
-def sample_data():
-    """Fixture zwracająca dane testowe."""
-    return {"key": "value"}
-
-@pytest.fixture
-def database_connection():
-    """Fixture symulująca połączenie z bazą danych."""
-    class FakeDatabase:
-        def query(self, query):
-            return {"result": "fake_data"}
-    return FakeDatabase()
-```
-
-```python
-# Użycie fixture w testach
-
-import pytest
-
-@pytest.fixture
-def sample_data():
-    """Fixture zwracająca dane testowe."""
-    return {"key": "value"}
-
-@pytest.fixture
-def database_connection():
-    """Fixture symulująca połączenie z bazą danych."""
-    class FakeDatabase:
-        def query(self, query):
-            return {"result": "fake_data"}
-    return FakeDatabase()
-```
-
-**Mockowanie**
-
-Mockowanie to technika zastępowania rzeczywistych zależności (np. połączeń z bazą danych, API) sztucznymi obiektami podczas testów. Dzięki temu:
-
-- Możemy izolować testy od zewnętrznych zależności.
-- Testy są szybsze i bardziej niezawodne.
-- Możemy testować zachowanie kodu w trudnych do odtworzenia warunkach.
-
-```python
-# Mockowanie funkcji zewnętrznej
-from unittest.mock import patch
-
-@patch("my_package.module1.requests.get")
-def test_get_data_from_api(mock_get):
-    # Konfiguracja mocka
-    mock_get.return_value.json.return_value = {"key": "mocked_value"}
-
-    # Wywołanie funkcji
-    from my_package.module1 import get_data_from_api
-    result = get_data_from_api("http://example.com/api")
-
-    # Sprawdzenie wyniku
-    assert result == {"key": "mocked_value"}
-    mock_get.assert_called_once_with("http://example.com/api")
-```
-
-```python
-# Mockowanie klasy
-from unittest.mock import MagicMock
-
-def test_database_fetch_data():
-    # Tworzenie mocka
-    mock_database = MagicMock()
-    mock_database.fetch_data.return_value = {"result": "mocked_data"}
-
-    # Testowanie funkcji z mockiem
-    result = mock_database.fetch_data("SELECT * FROM table")
-    assert result == {"result": "mocked_data"}
-```
-
-```python
-# Mockowanie z użyciem pytest-mock
-def test_get_data_with_mocker(mocker):
-    # Mockowanie requests.get
-    mock_get = mocker.patch("my_package.module1.requests.get")
-    mock_get.return_value.json.return_value = {"key": "mocked_value"}
-
-    from my_package.module1 import get_data_from_api
-    result = get_data_from_api("http://example.com/api")
-
-    assert result == {"key": "mocked_value"}
-    mock_get.assert_called_once_with("http://example.com/api")
+```ini
+[pytest]
+testpaths = tests
+python_files = test_*.py
+python_functions = test_*
+addopts = -v --tb=short
+markers =
+    slow: marks tests as slow
+    integration: marks integration tests
 ```
 
 ## 📝 Zadania
 
-1. Stwórz testy jednostkowe dla programu dla karetek oraz dla rezerwacji w kinie.
-2. Stwórz testy e2e (w naszym przypadku będą to po prostu całe "symulacje" zaistniałych sytuacji w programie).
-3. Uruchomy testy wykorzystując `pytest`.
+1. Napisz testy jednostkowe dla klasy `CinemaHall`:
+    - Test rezerwacji miejsca,
+    - Test rezerwacji zajętego miejsca (oczekiwany wyjątek),
+    - Test rezerwacji przez użytkownika, który już ma rezerwację,
+    - Test anulowania rezerwacji,
+    - Test anulowania przez nieprawidłowego użytkownika.
+
+2. Użyj parametryzacji do przetestowania różnych scenariuszy rezerwacji.
+
+3. Stwórz fixture `cinema_hall`, która tworzy salę 5x5 z kilkoma zarezerwowanymi miejscami.
+
+4. Napisz test e2e symulujący pełny workflow: rezerwacja → próba podwójnej rezerwacji → anulowanie → ponowna rezerwacja.
+
+5. Uruchom testy z pokryciem kodu (`pytest --cov`).
+
+???+ tip "Struktura plików"
+    ```
+    tests/
+    ├── conftest.py
+    ├── unit/
+    │   └── zaj06/
+    │       └── test_cinema.py
+    └── e2e/
+        └── test_cinema_workflow.py
+    ```
