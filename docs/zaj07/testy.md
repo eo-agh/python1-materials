@@ -19,6 +19,41 @@ pytest -x                   # zatrzymaj po pierwszym błędzie
 pytest -k "add"             # tylko testy zawierające "add" w nazwie
 ```
 
+## Organizacja testów w repozytorium
+
+```
+projekt/
+├── src/
+│   └── myapp/
+│       ├── __init__.py
+│       ├── cinema.py
+│       └── exceptions.py
+├── tests/
+│   ├── conftest.py          # Współdzielone fixtures
+│   ├── unit/
+│   │   ├── test_cinema.py
+│   │   └── test_exceptions.py
+│   ├── integration/
+│   │   └── test_database.py
+│   └── e2e/
+│       └── test_workflows.py
+├── pytest.ini
+└── pyproject.toml
+```
+
+Przykładowy `pytest.ini`:
+
+```ini
+[pytest]
+testpaths = tests
+python_files = test_*.py
+python_functions = test_*
+addopts = -v --tb=short
+markers =
+    slow: marks tests as slow
+    integration: marks integration tests
+```
+
 ## Rodzaje testów
 
 ### Testy jednostkowe (unit tests)
@@ -79,6 +114,8 @@ def test_full_reservation_workflow():
     - **Testy bezpieczeństwa** - szukają luk (SQL Injection, XSS)
 
 ## Asercje w pytest
+
+Asercja (`assert`) to instrukcja sprawdzająca, czy dany warunek jest prawdziwy - jeśli nie, test kończy się niepowodzeniem. Dzięki asercjom możemy w prosty sposób weryfikować, czy wynik działania kodu zgadza się z oczekiwanym.
 
 ```python
 def test_assertions():
@@ -185,6 +222,8 @@ def test_hall_capacity(cinema_hall):
 ```
 
 ### Fixture z setup i teardown (yield)
+
+Fixture z `yield` pozwala podzielić kod na dwie fazy: setup (przed `yield`) przygotowuje zasoby, a teardown (po `yield`) je sprząta. Dzięki temu test otrzymuje gotowy zasób, a po jego zakończeniu następuje automatyczne zwolnienie zasobów - nawet jeśli test zakończy się błędem.
 
 ```python
 @pytest.fixture
@@ -298,6 +337,8 @@ Mockowanie zastępuje rzeczywiste zależności sztucznymi obiektami.
 
 ### Podstawowy mock
 
+Podstawowy mock (`MagicMock`) to sztuczny obiekt, który tworzysz od zera i **ręcznie** przekazujesz do testowanego kodu. Musisz sam zadbać o to, żeby testowana funkcja używała tego mocka (np. przez argument lub dependency injection).
+
 ```python
 from unittest.mock import MagicMock, patch
 
@@ -315,6 +356,8 @@ def test_with_mock():
 ```
 
 ### Patchowanie (podmiana w runtime)
+
+Patchowanie (`patch`) **automatycznie** podmienia istniejący obiekt w module na mock w runtime. Nie musisz zmieniać sposobu wywołania - patch "wchodzi" do kodu i podmienia import, co jest przydatne gdy testujesz kod, który sam importuje zależności.
 
 ```python
 from unittest.mock import patch
@@ -462,41 +505,6 @@ def test_cancel_reservation():
 
 def test_reserve_occupied_seat_raises():
     ...
-```
-
-## Organizacja testów w repozytorium
-
-```
-projekt/
-├── src/
-│   └── myapp/
-│       ├── __init__.py
-│       ├── cinema.py
-│       └── exceptions.py
-├── tests/
-│   ├── conftest.py          # Współdzielone fixtures
-│   ├── unit/
-│   │   ├── test_cinema.py
-│   │   └── test_exceptions.py
-│   ├── integration/
-│   │   └── test_database.py
-│   └── e2e/
-│       └── test_workflows.py
-├── pytest.ini
-└── pyproject.toml
-```
-
-Przykładowy `pytest.ini`:
-
-```ini
-[pytest]
-testpaths = tests
-python_files = test_*.py
-python_functions = test_*
-addopts = -v --tb=short
-markers =
-    slow: marks tests as slow
-    integration: marks integration tests
 ```
 
 ## 📝 Zadania
