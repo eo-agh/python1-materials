@@ -165,7 +165,7 @@ logger.error("Konsola i plik")
 
 ### Rotacja plików logów
 
-Dla długo działających aplikacji — automatyczne tworzenie nowych plików:
+Dla długo działających aplikacji - automatyczne tworzenie nowych plików:
 
 ```python
 from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
@@ -190,165 +190,7 @@ handler = TimedRotatingFileHandler(
 
 **Dobra praktyka**: każdy moduł ma własny logger o nazwie `__name__`.
 
-```python
-# myapp/database.py
-import logging
-
-logger = logging.getLogger(__name__)  # logger o nazwie "myapp.database"
-
-def connect():
-    logger.info("Łączenie z bazą danych...")
-    try:
-        # ...
-        logger.debug("Połączenie nawiązane")
-    except Exception as e:
-        logger.error(f"Błąd połączenia: {e}")
-        raise
-```
-
-```python
-# myapp/api.py
-import logging
-
-logger = logging.getLogger(__name__)  # logger o nazwie "myapp.api"
-
-def fetch_data(url):
-    logger.info(f"Pobieranie danych z {url}")
-    # ...
-```
-
-```python
-# main.py
-import logging
-from myapp import database, api
-
-# Konfiguracja w głównym pliku
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-)
-
-database.connect()
-api.fetch_data("https://api.example.com")
-```
-
-Output:
-
-```
-2024-01-15 10:30:45 - myapp.database - INFO - Łączenie z bazą danych...
-2024-01-15 10:30:45 - myapp.database - DEBUG - Połączenie nawiązane
-2024-01-15 10:30:46 - myapp.api - INFO - Pobieranie danych z https://api.example.com
-```
-
-## Hierarchia loggerów
-
-Loggery tworzą hierarchię opartą na nazwach (separator: `.`):
-
-```
-root
-├── myapp
-│   ├── myapp.database
-│   └── myapp.api
-└── urllib3
-```
-
-Komunikaty propagują w górę — jeśli `myapp.database` nie ma handlerów, użyje handlerów z `myapp` lub `root`.
-
-```python
-# Wyłączenie propagacji
-logger = logging.getLogger("myapp.database")
-logger.propagate = False  # Nie przekazuj do loggerów nadrzędnych
-```
-
-## Konfiguracja przez słownik (dictConfig)
-
-Dla większych projektów — konfiguracja w jednym miejscu:
-
-```python
-import logging.config
-
-LOGGING_CONFIG = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    
-    "formatters": {
-        "standard": {
-            "format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-        },
-        "detailed": {
-            "format": "%(asctime)s - %(name)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s"
-        }
-    },
-    
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-            "level": "INFO",
-            "formatter": "standard",
-            "stream": "ext://sys.stdout"
-        },
-        "file": {
-            "class": "logging.FileHandler",
-            "level": "ERROR",
-            "formatter": "detailed",
-            "filename": "errors.log",
-            "mode": "a"
-        }
-    },
-    
-    "loggers": {
-        "myapp": {
-            "level": "DEBUG",
-            "handlers": ["console", "file"],
-            "propagate": False
-        }
-    },
-    
-    "root": {
-        "level": "WARNING",
-        "handlers": ["console"]
-    }
-}
-
-logging.config.dictConfig(LOGGING_CONFIG)
-
-# Użycie
-logger = logging.getLogger("myapp")
-logger.info("Aplikacja uruchomiona")
-```
-
-## Logowanie wyjątków
-
-```python
-import logging
-
-logger = logging.getLogger(__name__)
-
-def divide(a, b):
-    try:
-        return a / b
-    except ZeroDivisionError:
-        logger.exception("Błąd dzielenia")  # automatycznie dołącza traceback
-        raise
-
-# Alternatywnie
-try:
-    result = divide(10, 0)
-except ZeroDivisionError:
-    logger.error("Dzielenie nie powiodło się", exc_info=True)
-```
-
-Output:
-
-```
-2024-01-15 10:30:45 - __main__ - ERROR - Błąd dzielenia
-Traceback (most recent call last):
-  File "main.py", line 7, in divide
-    return a / b
-ZeroDivisionError: division by zero
-```
-
-## Fabryka loggerów
+### Fabryka loggerów
 
 Pomocnicza funkcja do tworzenia skonfigurowanych loggerów:
 
@@ -409,16 +251,88 @@ def connect():
     logger.info("Łączenie z bazą...")
 ```
 
+```python
+# myapp/api.py
+from myapp.utils.logging import get_logger
+
+logger = get_logger(__name__)  # logger o nazwie "myapp.api"
+
+def fetch_data(url):
+    logger.info(f"Pobieranie danych z {url}")
+    # ...
+```
+
+Output:
+
+```
+2024-01-15 10:30:45 - myapp.database - INFO - Łączenie z bazą danych...
+2024-01-15 10:30:45 - myapp.database - DEBUG - Połączenie nawiązane
+2024-01-15 10:30:46 - myapp.api - INFO - Pobieranie danych z https://api.example.com
+```
+
+## Hierarchia loggerów
+
+Loggery tworzą hierarchię opartą na nazwach (separator: `.`):
+
+```
+root
+├── myapp
+│   ├── myapp.database
+│   └── myapp.api
+└── urllib3
+```
+
+Komunikaty propagują w górę - jeśli `myapp.database` nie ma handlerów, użyje handlerów z `myapp` lub `root`.
+
+```python
+# Wyłączenie propagacji
+logger = logging.getLogger("myapp.database")
+logger.propagate = False  # Nie przekazuj do loggerów nadrzędnych
+```
+
+## Logowanie wyjątków
+
+```python
+import logging
+
+logger = logging.getLogger(__name__)
+
+def divide(a, b):
+    try:
+        return a / b
+    except ZeroDivisionError:
+        logger.exception("Błąd dzielenia")  # automatycznie dołącza traceback
+        raise
+
+# Alternatywnie
+try:
+    result = divide(10, 0)
+except ZeroDivisionError:
+    logger.error("Dzielenie nie powiodło się", exc_info=True)
+```
+
+Output:
+
+```
+2024-01-15 10:30:45 - __main__ - ERROR - Błąd dzielenia
+Traceback (most recent call last):
+  File "main.py", line 7, in divide
+    return a / b
+ZeroDivisionError: division by zero
+```
+
 ## Dobre praktyki
 
 ### 1. Używaj `__name__` jako nazwy loggera
 
 ```python
+from myapp.utils.logging import get_logger
+
 # ✅ Dobrze
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 # ❌ Źle
-logger = logging.getLogger("my_logger")
+logger = get_logger("my_logger")
 ```
 
 ### 2. Konfiguruj logowanie raz, w głównym pliku
