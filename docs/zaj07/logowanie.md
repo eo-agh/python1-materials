@@ -412,11 +412,12 @@ logger.info(f"Logowanie użytkownika {username}")
 
 ???+ tip "Struktura plików"
     ```
-    python1course/zaj07/
-    ├── utils/
-    │   ├── __init__.py
-    │   └── logging.py      # funkcja get_logger()
-    ├── cinema.py           # CinemaHall z logowaniem
+    <repo-main-folder>/
+    ├── python1course/zaj07/
+    │   ├── utils/
+    │   │   ├── __init__.py
+    │   │   └── logging.py      # funkcja get_logger()
+    │   └── cinema.py           # CinemaHall z logowaniem
     └── logs/
         └── app_20240115.log
     ```

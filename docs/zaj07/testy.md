@@ -22,7 +22,7 @@ pytest -k "add"             # tylko testy zawierające "add" w nazwie
 ## Organizacja testów w repozytorium
 
 ```
-projekt/
+<repo-main-folder>/
 ├── src/
 │   └── myapp/
 │       ├── __init__.py
