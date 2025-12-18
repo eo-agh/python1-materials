@@ -7,11 +7,7 @@ W tym przewodniku przejdziemy krok po kroku po tym jak stworzyć i zarządzać �
 
 ## Przygotowanie środowiska wirtualnego
 
-!!! danger "Praca w Dockerze"
-    
-    Ponieważ pracujemy w oparciu o moje repozytorium, proszę nie wykonywać kroków oznaczonych ❌. Te kroki zostały już niejako "dostarczone" w ramach moich zmian.
-
-### ❌ Krok 1: Przygotowanie plików definicji
+### ✅ Krok 1: Przygotowanie plików definicji
 
 !!! info "Co to jest `env-dev.yml`?"
 
@@ -23,7 +19,7 @@ W tym przewodniku przejdziemy krok po kroku po tym jak stworzyć i zarządzać �
 
     W przypadku pliku z `dev`, mamy tam dodatkowe narzędzia deweloperskie, potrzebne tylko przy rozwoju naszego projektu.
 
-Plik `env.yml` powinien zawierać następującą strukturę (w głównym katalogu projektu):
+Stwórz plik `env.yml` w głównym katalogu projektu z następującą zawartością:
 
 ```yaml
 name: python1course-env
@@ -38,7 +34,7 @@ dependencies:
   - numpy
 ```
 
-Plik `env-dev.yml` powinien zawierać następującą strukturę (w głównym katalogu projektu):
+Stwórz plik `env-dev.yml` w głównym katalogu projektu z następującą zawartością:
 
 ```yaml
 name: python1course-env
