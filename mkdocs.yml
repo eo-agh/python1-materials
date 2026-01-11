@@ -85,3 +85,6 @@ nav:
     - 🛠️ Logowanie: zaj07/logowanie.md
     - 🧪 Środowiska wirtualne: zaj08/srodowiska_wirtualne.md
     - 🧪 Mamba i conda-lock: zaj08/mamba_condalock.md
+    - 🧹 Formatowanie i linting: zaj09/formatowanie.md
+    - 🧹 Pre-commit hooks: zaj09/precommit.md
+    - 🧹 Automatyzacja z Make: zaj09/make.md
