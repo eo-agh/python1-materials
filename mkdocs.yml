@@ -88,3 +88,6 @@ nav:
     - 🧹 Formatowanie i linting: zaj09/formatowanie.md
     - 🧹 Pre-commit hooks: zaj09/precommit.md
     - 🧹 Automatyzacja z Make: zaj09/make.md
+    - 📦 Wprowadzenie do pakietów: zaj10/pakiety.md
+    - 📦 Budowanie pakietu: zaj10/budowanie.md
+    - 📦 Publikowanie pakietu: zaj10/publikowanie.md
