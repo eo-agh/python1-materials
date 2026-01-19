@@ -264,21 +264,21 @@
 - Reprodukowalność
 - Ochrona instalacji systemowej Pythona
 
-10.2. Narzędzia
+10.2. Narzędzia - koncepcyjnie
 
-10.3. Pliki konfiguracyjne i pliki blokady
+10.3. Pliki konfiguracyjne i pliki blokady - do czego służą
 
 ---
 
 ## 11. Formatowanie i analiza kodu
 
-11.1. PEP 8
+11.1. PEPY i szczególnie ten PEP 8
 
 - Styl kodowania Python
 - Wcięcia (4 spacje)
 - Nazewnictwo: `snake_case` vs `CamelCase`
 
-11.2. Ruff
+11.2. Narzędzia do lintingu i formatowania, na przykładzie ruff
 
 - Linting i formatowanie w jednym
 - `ruff check .`, `ruff format .`
