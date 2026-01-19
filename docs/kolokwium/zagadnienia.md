@@ -266,18 +266,7 @@
 
 10.2. Narzędzia
 
-- `venv` - wbudowane, podstawowe
-- `pipenv` - `Pipfile` + lock
-- `poetry` - `pyproject.toml` + lock
-- `conda`/`mamba` - pakiety spoza PyPI
-- `pixi` - nowoczesne, szybkie
-
-10.3. Pliki konfiguracyjne
-
-- `requirements.txt`
-- `environment.yml`
-- `pyproject.toml`
-- Lock files (reproducibility)
+10.3. Pliki konfiguracyjne i pliki blokady
 
 ---
 
