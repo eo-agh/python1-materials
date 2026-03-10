@@ -167,7 +167,7 @@ print(zbior1 | zbior2)  # Suma zbiorów
 ---
 
 ## 📝 Zadania
-1. Stwórz nowy plik o nazwie `skrypt2.py`, wszystkie kolejne instrukcje wprowadzaj po kolei w tym pliku
+1. W katalogu `python1course/zaj01` stwórz nowy plik o nazwie `skrypt2.py`. Wszystkie kolejne instrukcje z tego rozdziału wykonuj właśnie w tym pliku.
 
 !!! tip "Pamiętaj, że dobrą praktyką jest importowanie modułów i pakietów na samym początku pliku"
 

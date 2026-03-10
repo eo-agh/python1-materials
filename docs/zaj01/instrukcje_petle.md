@@ -134,6 +134,8 @@ if True:
 
 ## 📝 Zadania
 
+Na potrzeby tego rozdziału pracuj w pliku `instrukcje_petle.py` umieszczonym w katalogu `python1course/zaj01`.
+
 1. Napisz program, który iteruje przez listę imion używając pętli `for` oraz funkcji `enumerate()`, aby wyświetlić indeks każdego imienia wraz z samym imieniem. 
 2. Stwórz przykłady dla testów `if`: 
     - Gdzie wystąpią dwa warunki - napisz program sprawdzający czy dana liczba jest dodatnia i parzysta. Jeśli tak, program powinien wydrukować `Liczba jest dodatnia i parzysta`

@@ -1,3 +1,5 @@
+W katalogu `python1course/zaj01` utwórz plik `zadanie_json.py`, w którym wykonasz wszystkie poniższe kroki.
+
 Wczytaj jako słownik [plik](https://aghedupl-my.sharepoint.com/:u:/g/personal/jstaszel_agh_edu_pl/EaTk7lsQtiJHqZ-6Q5M8kc0Bi6uBeR1rj0LEOMRiQ4lpgQ?e=dznMcO) z rozszerzeniem JSON (przydatny może okazać się pakiet `json`). Zapisz do zmiennej połączone wszystkie teksty z pliku. Zmodyfikuj następująco ten tekst: 
 
 - Zamień wszystkie duże litery na małe, 

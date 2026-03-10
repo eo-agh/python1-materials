@@ -63,27 +63,28 @@ Dzięki tym mechanizmom Python zapewnia elastyczność w organizacji kodu i jego
 
 ## 📝 Zadania
 
-  1. Z pakietu `os` zaimportuj funkcję `getcwd`
+Na potrzeby tego rozdziału pracuj w katalogu `python1course/zaj01`. Utwórz w nim pliki `skrypt1.py` oraz `czas.py` zgodnie z poniższymi punktami.
+
+  1. W pliku `skrypt1.py`, z pakietu `os` zaimportuj funkcję `getcwd`
      ```python
      from os import getcwd
      ```
   2. Wywołaj funkcję i przypisz wynik do zmiennej `current_path`
   3. Wypisz wartość zmiennej `current_path`
-  4. Stwórz plik `czas.py`
-  5. W pliku `czas.py` dodaj zmienną `aktualny_czas`:
+  4. W pliku `czas.py` dodaj zmienną `aktualny_czas`:
      ```python
      from datetime import datetime
      aktualny_czas = datetime.now()
      ```
-  6. Zaimportuj moduł `czas` w `skrypt1.py`
-  7. Wypisz wartość zmiennej `aktualny_czas`
-  8. Zaimportuj pakiet `time` i dodaj opóźnienie:
+  5. Zaimportuj moduł `czas` w `skrypt1.py`
+  6. Wypisz wartość zmiennej `aktualny_czas`
+  7. Zaimportuj pakiet `time` i dodaj opóźnienie:
      ```python
      import time
      time.sleep(20)
      ```
-  9. Ponownie wypisz wartość zmiennej `aktualny_czas`
-  10. Przeładuj moduł `czas` (`importlib.reload()`)
-  11. Po raz trzeci wypisz wartość zmiennej `aktualny_czas`
+  8. Ponownie wypisz wartość zmiennej `aktualny_czas`
+  9. Przeładuj moduł `czas` (`importlib.reload()`)
+  10. Po raz trzeci wypisz wartość zmiennej `aktualny_czas`
 
 Zwróć uwagę na to, kiedy zmieniła się wartość zmiennej. Zastanów się, kiedy inicjowana jest zmienna `aktualny_czas`. 
