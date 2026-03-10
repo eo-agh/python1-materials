@@ -1,0 +1,56 @@
+site_name: Programowanie w języku Python (I)
+docs_dir: docs
+repo_url: https://github.com/eo-agh/python1-materials
+repo_name: python1-materials
+
+copyright: Copyright 2024 Jakub Staszel KGiIS AGH
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences
+  - pymdownx.details
+
+nav:
+  - Strona główna: index.md
+  - Podstawy programowania:
+    - 👽 Środowisko lokalne: zaj0/srod-lok.md
+    - 👽 Git - kontrola wersji: zaj0/git.md
+  - Podstawy Pythona:
+    - 🌞 Moduły i przestrzenie nazw: zaj01/moduly_przestrzenie.md
+    - 🌞 Podstawowe typy wbudowane: zaj01/typy_wbudowane.md
+    - 🌞 Niespodziewane zachowania: zaj01/niespodziewane.md
+    - 🌞 Instrukcje warunkowe i pętle: zaj01/instrukcje_petle.md
+    - 🌞 Praca z plikami: zaj01/praca_z_plikami.md
+    - 🌞📝 Zadanie sprawdzające: zaj01/zadania_sprawdzajace.md
+    - 🌞 Przypisania: zaj01/przypisania.md
