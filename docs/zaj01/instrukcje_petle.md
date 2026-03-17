@@ -134,11 +134,11 @@ if True:
 
 ## 📝 Zadania
 
-Na potrzeby tego rozdziału pracuj w pliku `instrukcje_petle.py`, stwórz go w katalogu `python1course/zaj01`.
+Stwórz plik `python1course/zaj01/instrukcje_petle.py` i wykonaj w nim poniższe zadania.
 
 1. Napisz program, który iteruje przez listę imion używając pętli `for` oraz funkcji `enumerate()`, aby wyświetlić indeks każdego imienia wraz z samym imieniem. 
 2. Stwórz przykłady dla testów `if`: 
     - Gdzie wystąpią dwa warunki - napisz program sprawdzający czy dana liczba jest dodatnia i parzysta. Jeśli tak, program powinien wydrukować `Liczba jest dodatnia i parzysta`
-    - Gdzie wykorzystane zostanie zaprzeczenie `not` lub `=!` - napisz program, który sprawdza, czy wprowadzona przez użytkownika liczba nie jest równa zero. Jeśli nie jest, wydrukuj `Liczba jest różna od zera` 
+    - Gdzie wykorzystane zostanie zaprzeczenie `not` lub `!=` - napisz program, który sprawdza, czy wprowadzona przez użytkownika liczba nie jest równa zero. Jeśli nie jest, wydrukuj `Liczba jest różna od zera` 
     - Gdzie wykorzystane będzie słowo `in` - napisz program, który sprawdza, czy wprowadzony przez użytkownika owoc znajduje się na liście dostępnych owoców (np. `['jabłko', 'banan', 'pomarańcza']`). Jeśli tak, program powinien wydrukować `Owoc jest dostępny`
 3. Stwórz przykład z pętlą `while` - stwórz program, który będzie ciągle prosił użytkownika o wprowadzenie liczby. Program powinien sumować wprowadzone liczby i kończyć działanie, gdy suma przekroczy `100`. Po zakończeniu pętli, program powinien wydrukować sumę wprowadzonych liczb.

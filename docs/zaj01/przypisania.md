@@ -20,7 +20,7 @@ print(f"A {przyprawy} to użyte przyprawy.")
 
 ## 📝 Zadania
 
-Na potrzeby tego rozdziału pracuj w pliku `przypisania.py`, utwórz go w katalogu `python1course/zaj01`.
+Stwórz plik `python1course/zaj01/przypisania.py` i wykonaj w nim poniższe zadania.
 
 1. Mając daną krotkę `dane = (2024, 'Python', 3.8)`, przypisz każdy element krotki do odpowiednich zmiennych: `rok`, `jezyk` i `wersja`. Wyświetl te zmienne.
 
@@ -56,6 +56,8 @@ print(f"Lista a: {a}, lista b: {b}, lista c: {c}")
     **Głęboka kopia** tworzy nową instancję obiektu, a także kopiuje wszystkie obiekty zagnieżdżone wewnątrz niego. To oznacza, że głęboka kopia tworzy całkowicie nową strukturę danych, która nie współdzieli referencji z oryginalnym obiektem (np. poprzez `copy.deepcopy()`).
 
 ## 📝 Zadania
+
+Kontynuuj pracę w pliku `python1course/zaj01/przypisania.py`.
 
 1. Stwórz zmienną `a` oraz `b`, użyj przypisania z wieloma celami i przypisz im listę \[1, 2, 3\]: `a = b = [1, 2, 3]`. Zmodyfikuj pierwszy element listy `b` przez przypisanie `b[0] = 'zmieniono'`. Wyświetl obie listy `a` i `b`, a następnie wyjaśnij, dlaczego zmiana w `b` wpłynęła również na `a`. Czy listy są obiektami mutowalnymi?
 
@@ -114,6 +116,8 @@ print(x)
 ```
 
 ## 📝 Zadania
+
+Kontynuuj pracę w pliku `python1course/zaj01/przypisania.py`.
 
 1. Wyzwól następujący kod, wyświetl K, L, M i N. Wyjaśnij w jaki sposób konkatenacja zachowuje się inaczej od przypisania rozszerzonego.
 
