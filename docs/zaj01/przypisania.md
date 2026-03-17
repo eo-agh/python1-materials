@@ -20,7 +20,7 @@ print(f"A {przyprawy} to użyte przyprawy.")
 
 ## 📝 Zadania
 
-Na potrzeby tego rozdziału pracuj w pliku `przypisania.py` utworzonym w katalogu `python1course/zaj01`.
+Na potrzeby tego rozdziału pracuj w pliku `przypisania.py`, utwórz go w katalogu `python1course/zaj01`.
 
 1. Mając daną krotkę `dane = (2024, 'Python', 3.8)`, przypisz każdy element krotki do odpowiednich zmiennych: `rok`, `jezyk` i `wersja`. Wyświetl te zmienne.
 
