@@ -1,0 +1,99 @@
+### Metody instancji
+
+Domyślny sposób działania, jako pierwszy argument przyjmują `self`, który odnosi się do instancji.
+
+!!! tip "Zastosowanie: operacje na instancji"
+
+### Metody klasy
+
+Deklarowane za pomocą dekoratora `@classmethod`. Przyjmują jako pierwszy argument `cls`, który odnosi się do samej klasy, a nie jej instancji.
+
+```python
+class Pracownik:
+    liczba_pracownikow = 0  # Atrybut klasy
+
+    def __init__(self, imie, stanowisko):
+        self.imie = imie
+        self.stanowisko = stanowisko
+        Pracownik.liczba_pracownikow += 1
+
+    @classmethod
+    def z_nazwiska(cls, nazwisko):
+        # Alternatywny konstruktor
+        return cls(nazwisko, 'Nieznane stanowisko')
+
+    @classmethod
+    def ustaw_liczbe_pracownikow(cls, liczba):
+        cls.liczba_pracownikow = liczba
+
+# Tworzenie instancji za pomocą metody klasy
+nowy_pracownik = Pracownik.z_nazwiska('Kowalski')
+print(nowy_pracownik.imie)           # Kowalski
+print(nowy_pracownik.stanowisko)     # Nieznane stanowisko
+```
+
+!!! tip "Zastosowanie: operacje na klasie, alternatywne konstruktory"
+
+### Metody statyczne
+
+Deklarowane za pomocą dekoratora `@staticmethod`. Nie przyjmują żadnego specjalnego pierwszego argumentu i nie mają dostępu ani do instancji (`self`), ani do klasy (`cls`).
+
+```python
+class Kalkulator:
+    @staticmethod
+    def dodaj(a, b):
+        return a + b
+
+    @staticmethod
+    def odejmij(a, b):
+        return a - b
+
+# Wywoływanie metod statycznych
+print(Kalkulator.dodaj(5, 3))     # 8
+print(Kalkulator.odejmij(10, 4))  # 6
+```
+
+!!! tip "Zastosowanie: funkcje pomocnicze powiązane tematycznie z klasą"
+
+### Właściwości (`@property`)
+
+Dekorator `@property` pozwala zdefiniować metodę, która zachowuje się jak atrybut - można ją czytać bez nawiasów. Umożliwia hermetyzację: ukrywasz wewnętrzną implementację, a na zewnątrz udostępniasz kontrolowany dostęp.
+
+```python
+class Temperatura:
+    def __init__(self, celsius):
+        self._celsius = celsius  # konwencja: _ oznacza "wewnętrzny" atrybut
+
+    @property
+    def celsius(self):
+        return self._celsius
+
+    @celsius.setter
+    def celsius(self, wartosc):
+        if wartosc < -273.15:
+            raise ValueError("Temperatura nie może być niższa niż zero absolutne.")
+        self._celsius = wartosc
+
+    @property
+    def fahrenheit(self):
+        return self._celsius * 9 / 5 + 32
+
+t = Temperatura(100)
+print(t.celsius)     # 100    - wywołanie jak atrybut, nie jak metoda
+print(t.fahrenheit)  # 212.0  - przeliczane na bieżąco, tylko do odczytu
+
+t.celsius = 0        # działa, bo jest setter
+print(t.fahrenheit)  # 32.0
+
+t.celsius = -300     # ValueError: Temperatura nie może być niższa...
+```
+
+!!! tip "Zastosowanie: kontrolowany dostęp do atrybutów, walidacja przy przypisaniu, obliczane właściwości tylko do odczytu"
+
+## Przykład
+
+Zapoznaj się z nowym kodem w `python1course.zaj03.fleet.ambulance`.
+
+Metoda klasy - `get_instances_count` - odnosi się do samej klasy, a nie konkretnej instancji.
+
+Metoda statyczna - `validate_id` - metoda pomocniczna, nie ma dostępu do obiektu klasy czy instancji, gdybyśmy odnosili się do atrybutu klasy `__instances_count`, to nie moglibyśmy już mówić o metodzie statycznej.

@@ -65,3 +65,16 @@ nav:
     - ❄️ Dekoratory: zaj02/dekoratory.md
     - ❄️ Wyjątki: zaj02/wyjatki.md
     - ❄️ Generatory: zaj02/generatory.md
+  - Programowanie obiektowe:
+    - 🥕 Wstęp - klasy i instancje: zaj03/klasy.md
+    - 🥕 Po co programować obiektowo?: zaj03/obiektowe_poco.md
+    - 🥕 Dziedziczenie: zaj03/dziedziczenie.md
+    - 🥕 Przeciążanie operatorów: zaj03/przeciazanie.md
+    - 🥕 Narzędzia introspekcji: zaj03/introspekcja.md
+    - 🥕 Atrybuty pseudoprywatne: zaj03/pseudoprywatne.md
+    - 🥕📝 Zadania cz. 1: zaj03/zadania1.md
+    - 🥕 Rodzaje metod: zaj03/metody.md
+    - 🥕 Sloty: zaj03/sloty.md
+    - 🥕 Abstrakcyjne klasy nadrzędne: zaj03/abstrakcyjne.md
+    - 🥕 Rozszerzanie typów wbudowanych: zaj03/wbudowane.md
+    - 🥕📝 Zadania cz. 2: zaj03/zadania2.md
