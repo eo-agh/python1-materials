@@ -1,3 +1,23 @@
+## Przygotowanie repozytorium
+
+Zanim zaczniesz pracę, zsynchronizuj swoje lokalne repozytorium z najnowszymi zmianami:
+
+1. Wejdź do swojego zdalnego repozytorium.
+2. Odszukaj pull request i **zaakceptuj go** (merge do gałęzi `main`).
+3. Wróć do lokalnego repozytorium i zaktualizuj gałąź `main`:
+   ```bash
+   git checkout main
+   git pull
+   ```
+4. Na zaktualizowanej gałęzi `main` stwórz swoją gałąź roboczą na te zajęcia:
+   ```bash
+   git checkout -b zaj03
+   ```
+
+Od teraz pracuj na gałęzi `zaj03`.
+
+---
+
 ## Przykład
 
 Wejdź do repozytorium, zapoznaj się z gotowym kodem w pliku `main_zaj03.py` oraz modułami w folderze `python1course/zaj03`.
