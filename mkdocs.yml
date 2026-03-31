@@ -78,3 +78,6 @@ nav:
     - 🥕 Abstrakcyjne klasy nadrzędne: zaj03/abstrakcyjne.md
     - 🥕 Rozszerzanie typów wbudowanych: zaj03/wbudowane.md
     - 🥕📝 Zadania cz. 2: zaj03/zadania2.md
+  - Zaawansowane konstrukcje:
+    - 🧩 Iteratory: zaj04/iteratory.md
+    - 🧩 Menadżery kontekstu: zaj04/menadzery_kontekstu.md
