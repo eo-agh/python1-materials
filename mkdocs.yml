@@ -81,3 +81,6 @@ nav:
   - Zaawansowane konstrukcje:
     - 🧩 Iteratory: zaj04/iteratory.md
     - 🧩 Menadżery kontekstu: zaj04/menadzery_kontekstu.md
+  - Inżynieria oprogramowania:
+    - 🛠️ Testowanie: zaj05/testy.md
+    - 🛠️ Logowanie: zaj05/logowanie.md
