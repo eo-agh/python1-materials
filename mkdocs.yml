@@ -84,3 +84,5 @@ nav:
   - Inżynieria oprogramowania:
     - 🛠️ Testowanie: zaj05/testy.md
     - 🛠️ Logowanie: zaj05/logowanie.md
+    - 🧪 Środowiska wirtualne: zaj06/srodowiska_wirtualne.md
+    - 🧪 Mamba i conda-lock: zaj06/mamba_condalock.md
