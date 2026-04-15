@@ -38,7 +38,7 @@ dependencies:
 ```
 
 !!! tip "Połączenie z `zaj05`"
-    `pytest` w `env-dev.yml` to dokładnie to, czego używałeś na poprzednich zajęciach. Separacja na `env.yml` (produkcja) i `env-dev.yml` (development) oznacza, że `pytest` trafi tylko do środowiska deweloperskiego — nie do produkcyjnego.
+    `pytest` w `env-dev.yml` to dokładnie to, czego używałeś na poprzednich zajęciach. Separacja na `env.yml` (produkcja) i `env-dev.yml` (development) oznacza, że `pytest` trafi tylko do środowiska deweloperskiego - nie do produkcyjnego.
 
 !!! tip "Instalowanie poprzez `pip`"
 
@@ -201,7 +201,7 @@ Wykonaj kroki 1-4 dla swojego projektu `python1course`:
 
 ### 2. Dodaj nową zależność
 
-Symulujemy sytuację, w której projekt dostaje nowe wymaganie — potrzebna jest biblioteka `pandas`:
+Symulujemy sytuację, w której projekt dostaje nowe wymaganie - potrzebna jest biblioteka `pandas`:
 
 1. Dodaj `pandas` do `env.yml`.
 2. Wygeneruj ponownie oba pliki blokady.

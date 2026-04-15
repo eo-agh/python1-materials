@@ -4,9 +4,9 @@
 
 PEP-y to oficjalne dokumenty opisujące standardy i ulepszenia Pythona. Trzy najważniejsze dla codziennego pisania kodu:
 
-- **PEP 8** — styl kodowania: 4 spacje wcięcia, `snake_case` dla funkcji i zmiennych, `CamelCase` dla klas.
-- **PEP 257** — docstringi: każdy moduł, klasa i funkcja powinny mieć krótki docstring.
-- **PEP 484** — adnotacje typów.
+- **PEP 8** - styl kodowania: 4 spacje wcięcia, `snake_case` dla funkcji i zmiennych, `CamelCase` dla klas.
+- **PEP 257** - docstringi: każdy moduł, klasa i funkcja powinny mieć krótki docstring.
+- **PEP 484** - adnotacje typów.
 
 ## ruff
 
@@ -20,7 +20,7 @@ Na zajęciach skupimy się na narzędziu **`ruff`**, które integruje funkcjonal
 | Sprawdzanie błędów logicznych | ✅ | `flake8-bugbear`, `pylint` |
 | Formatowanie kodu | ✅ (`ruff format`) | `black` |
 | Wsparcie dla docstringów | ✅ | `pydocstyle` |
-| Wydajność | ✅ Ekstremalnie szybkie | — napisane w Rust |
+| Wydajność | ✅ Ekstremalnie szybkie | - napisane w Rust |
 
 ## Podstawowe użycie
 
@@ -96,7 +96,7 @@ Dodaj do `.vscode/settings.json`:
 }
 ```
 
-??? - tip "Integracja z CI/CD — GitHub Actions"
+??? - tip "Integracja z CI/CD - GitHub Actions"
 
     ```yaml
     name: Lint and Format

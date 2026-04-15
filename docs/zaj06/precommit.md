@@ -1,6 +1,6 @@
 # Pre-commit hooks
 
-Pre-commit to narzędzie, które **blokuje możliwość commitowania zmian**, jeśli nie spełniają one zdefiniowanych wymagań — uruchamia automatyczne sprawdzenia przed każdym `git commit`.
+Pre-commit to narzędzie, które **blokuje możliwość commitowania zmian**, jeśli nie spełniają one zdefiniowanych wymagań - uruchamia automatyczne sprawdzenia przed każdym `git commit`.
 
 ## Czym są git hooks?
 
@@ -66,9 +66,9 @@ pre-commit install
 
 ## Używanie
 
-Po instalacji hooki uruchamiają się **automatycznie** przy każdym `git commit` — także w GUI IDE.
+Po instalacji hooki uruchamiają się **automatycznie** przy każdym `git commit` - także w GUI IDE.
 
-Jeśli któryś hook znajdzie problemy, commit **nie zostanie wykonany** — musisz poprawić błędy i spróbować ponownie.
+Jeśli któryś hook znajdzie problemy, commit **nie zostanie wykonany** - musisz poprawić błędy i spróbować ponownie.
 
 ```bash
 # Ręczne uruchomienie na wszystkich plikach (przydatne przy pierwszym użyciu)
@@ -96,7 +96,7 @@ pre-commit autoupdate
     **Hook nie działa w Dockerze:**
     Upewnij się że `.git` jest zamontowany w kontenerze, lub używaj `pre-commit run` zamiast automatycznych hooków.
 
-??? - tip "Integracja z CI/CD — GitHub Actions"
+??? - tip "Integracja z CI/CD - GitHub Actions"
 
     ```yaml
     name: Pre-commit
@@ -142,7 +142,7 @@ pre-commit autoupdate
 
 5. Popraw wszystkie znalezione błędy.
 
-6. Spróbuj zrobić commit — hooki powinny uruchomić się automatycznie:
+6. Spróbuj zrobić commit - hooki powinny uruchomić się automatycznie:
    ```bash
    git add .
    git commit -m "Test pre-commit"

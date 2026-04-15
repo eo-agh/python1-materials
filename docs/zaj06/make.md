@@ -1,6 +1,6 @@
 # Automatyzacja zadań z Make
 
-`GNU Make` to narzędzie automatyzujące powtarzalne zadania — uruchamianie testów, instalację zależności, formatowanie kodu. Zamiast opisywać procesy w dokumentacji, definiuje się je raz w pliku `Makefile`. Pierwotnie stworzony dla kompilacji C/C++, dziś używany w projektach Pythona, Go, Rust i wielu innych.
+`GNU Make` to narzędzie automatyzujące powtarzalne zadania - uruchamianie testów, instalację zależności, formatowanie kodu. Zamiast opisywać procesy w dokumentacji, definiuje się je raz w pliku `Makefile`. Pierwotnie stworzony dla kompilacji C/C++, dziś używany w projektach Pythona, Go, Rust i wielu innych.
 
 ## Jak działa Make?
 
@@ -159,7 +159,7 @@ make
 # Uruchom konkretny target
 make test
 
-# Dry-run — pokaż komendy bez wykonywania
+# Dry-run - pokaż komendy bez wykonywania
 make -n test
 ```
 
@@ -167,16 +167,16 @@ make -n test
 
     1. **Zawsze używaj `.PHONY`** dla targetów, które nie tworzą plików.
     2. **Używaj zmiennych** dla powtarzających się wartości (`PYTHON`, `ENV_NAME`).
-    3. **Dodaj target `help`** jako domyślny — ułatwia nowym osobom odnalezienie się w projekcie.
-    4. **Używaj zależności** zamiast duplikować komendy — jeśli `test` i `lint` potrzebują instalacji, zrób `install` jako wspólną zależność.
+    3. **Dodaj target `help`** jako domyślny - ułatwia nowym osobom odnalezienie się w projekcie.
+    4. **Używaj zależności** zamiast duplikować komendy - jeśli `test` i `lint` potrzebują instalacji, zrób `install` jako wspólną zależność.
 
 ??? - warning "Częste problemy"
 
-    **`missing separator`** — używasz spacji zamiast tabulatora przed komendami. Każda komenda w targecie musi zaczynać się od **taba**.
+    **`missing separator`** - używasz spacji zamiast tabulatora przed komendami. Każda komenda w targecie musi zaczynać się od **taba**.
 
-    **Target nie uruchamia się** — istnieje plik o nazwie targetu. Dodaj `.PHONY: nazwa-targetu`.
+    **Target nie uruchamia się** - istnieje plik o nazwie targetu. Dodaj `.PHONY: nazwa-targetu`.
 
-    **Zmienne nie działają** — błędna składnia. Używaj `$(VAR)` lub `${VAR}`.
+    **Zmienne nie działają** - błędna składnia. Używaj `$(VAR)` lub `${VAR}`.
 
 ## 📝 Zadania
 
