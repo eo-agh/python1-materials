@@ -84,8 +84,8 @@ nav:
   - Inżynieria oprogramowania:
     - 🛠️ Testowanie: zaj05/testy.md
     - 🛠️ Logowanie: zaj05/logowanie.md
-    - 🧪 Środowiska wirtualne: zaj06/srodowiska_wirtualne.md
-    - 🧪 Mamba i conda-lock: zaj06/mamba_condalock.md
-    - 🧹 Formatowanie i linting: zaj06/formatowanie.md
-    - 🧹 Pre-commit hooks: zaj06/precommit.md
-    - 🧹 Automatyzacja z Make: zaj06/make.md
+    - 🌸 Środowiska wirtualne: zaj06/srodowiska_wirtualne.md
+    - 🌸 Mamba i conda-lock: zaj06/mamba_condalock.md
+    - 🌸 Formatowanie i linting: zaj06/formatowanie.md
+    - 🌸 Pre-commit hooks: zaj06/precommit.md
+    - 🌸 Automatyzacja z Make: zaj06/make.md
