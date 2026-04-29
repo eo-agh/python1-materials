@@ -92,7 +92,7 @@ Mamy 2 główne typy importu:
 
 ## 📝 Zadania
 
-!!! danger "To powinni mieć Państwo wykonane w ramach zadania domowego."
+!!! danger "To powinni mieć Państwo już w większości zrobione (mogą się pewnie różnić nazwy). W takim wypadku jedynie należy uwzględnić sposób importowania i pliki `__init__.py`"
 
 1. Stwórz strukturę pakietu `python1course` i przenieś do niego stworzone do tej pory skrypty (z wszystkich zajęć). Użyj struktury z przykładu, czyli subpakiety odpowiadające konkretnym zajęciom np. `zajecia01`.
 
