@@ -92,3 +92,7 @@ nav:
     - 📦 Wprowadzenie do pakietów: zaj07/pakiety.md
     - 📦 Budowanie pakietu: zaj07/budowanie.md
     - 📦 Publikowanie pakietu: zaj07/publikowanie.md
+  - Projekt zaliczeniowy:
+    - Wstęp: proj/wstep.md
+    - Technologie: proj/technologie.md
+    - Rozszerzanie projektu: proj/praca.md
