@@ -1,0 +1,3404 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../zaj04/menadzery_kontekstu/">
+      
+      
+        <link rel="next" href="../logowanie/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>🛠️ Testowanie - Programowanie w języku Python (I)</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#testowanie-w-pythonie" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Programowanie w języku Python (I)" class="md-header__button md-logo" aria-label="Programowanie w języku Python (I)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Programowanie w języku Python (I)
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              🛠️ Testowanie
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1M8 13h8v-2H8zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4a5 5 0 0 0 5-5 5 5 0 0 0-5-5"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5M7 15a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/eo-agh/python1-materials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    python1-materials
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Programowanie w języku Python (I)" class="md-nav__button md-logo" aria-label="Programowanie w języku Python (I)" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Programowanie w języku Python (I)
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/eo-agh/python1-materials" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    python1-materials
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strona główna
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Podstawy programowania
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Podstawy programowania
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj0/srod-lok/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👽 Środowisko lokalne
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj0/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    👽 Git - kontrola wersji
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Podstawy Pythona
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Podstawy Pythona
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj01/moduly_przestrzenie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌞 Moduły i przestrzenie nazw
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj01/typy_wbudowane/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌞 Podstawowe typy wbudowane
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj01/niespodziewane/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌞 Niespodziewane zachowania
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj01/instrukcje_petle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌞 Instrukcje warunkowe i pętle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj01/praca_z_plikami/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌞 Praca z plikami
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj01/zadania_sprawdzajace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌞📝 Zadanie sprawdzające
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj01/przypisania/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌞 Przypisania
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pętle
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Pętle
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj02/petle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❄️ Wstęp - pętle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj02/listy_skladane/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❄️ Listy składane
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Funkcje
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Funkcje
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj02/funkcje/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❄️ Wstęp - funkcje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj02/zakres_zmiennych/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❄️ Zakres zmiennych
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj02/lambda/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❄️ Funkcje anonimowe - lambda
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj02/funkcje_jako_obiekty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❄️ Funkcje jako obiekty i domknięcia
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj02/dekoratory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❄️ Dekoratory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj02/wyjatki/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❄️ Wyjątki
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj02/generatory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ❄️ Generatory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Programowanie obiektowe
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Programowanie obiektowe
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj03/klasy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🥕 Wstęp - klasy i instancje
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj03/obiektowe_poco/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🥕 Po co programować obiektowo?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj03/dziedziczenie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🥕 Dziedziczenie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj03/przeciazanie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🥕 Przeciążanie operatorów
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj03/introspekcja/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🥕 Narzędzia introspekcji
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj03/pseudoprywatne/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🥕 Atrybuty pseudoprywatne
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj03/zadania1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🥕📝 Zadania cz. 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj03/metody/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🥕 Rodzaje metod
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj03/sloty/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🥕 Sloty
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj03/abstrakcyjne/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🥕 Abstrakcyjne klasy nadrzędne
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj03/wbudowane/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🥕 Rozszerzanie typów wbudowanych
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj03/zadania2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🥕📝 Zadania cz. 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Zaawansowane konstrukcje
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Zaawansowane konstrukcje
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj04/iteratory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧩 Iteratory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj04/menadzery_kontekstu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧩 Menadżery kontekstu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inżynieria oprogramowania
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Inżynieria oprogramowania
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🛠️ Testowanie
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🛠️ Testowanie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#szybki-start-z-pytest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Szybki start z pytest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#organizacja-testow-w-repozytorium" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organizacja testów w repozytorium
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rodzaje-testow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rodzaje testów
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rodzaje testów">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testy-jednostkowe-unit-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testy jednostkowe (unit tests)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testy-integracyjne-integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testy integracyjne (integration tests)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testy-e2e-end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testy e2e (end-to-end)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asercje-w-pytest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asercje w pytest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testowanie-wyjatkow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testowanie wyjątków
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parametryzacja-testow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parametryzacja testów
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixtures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fixtures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#podstawowe-uzycie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Podstawowe użycie
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixture-z-setup-i-teardown-yield" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixture z setup i teardown (yield)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scope-fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scope fixtures
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plik-conftestpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plik conftest.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#markery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Markery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mockowanie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockowanie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mockowanie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#podstawowy-mock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Podstawowy mock
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patchowanie-podmiana-w-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patchowanie (podmiana w runtime)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mock-z-pytest-mock-czystszy-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mock z pytest-mock (czystszy syntax)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pokrycie-kodu-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pokrycie kodu (coverage)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wzorzec-aaa-arrange-act-assert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wzorzec AAA (Arrange-Act-Assert)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dobre-praktyki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dobre praktyki
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dobre praktyki">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nazewnictwo-testow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nazewnictwo testów
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#izolacja-testow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Izolacja testów
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jeden-test-jedna-rzecz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jeden test = jedna rzecz
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zadania" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Zadania
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 Zadania">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-testy-jednostkowe-klasy-incident" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Testy jednostkowe klasy Incident
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-testy-jednostkowe-klasy-ambulance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Testy jednostkowe klasy Ambulance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-testy-klasy-incidentqueue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Testy klasy IncidentQueue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fixtures-i-conftestpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Fixtures i conftest.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-uruchom-testy-z-pokryciem-kodu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Uruchom testy z pokryciem kodu
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logowanie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🛠️ Logowanie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj06/srodowiska_wirtualne/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌸 Środowiska wirtualne
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj06/mamba_condalock/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌸 Mamba i conda-lock
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj06/formatowanie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌸 Formatowanie i linting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj06/precommit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌸 Pre-commit hooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj06/make/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🌸 Automatyzacja z Make
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj07/pakiety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📦 Wprowadzenie do pakietów
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj07/budowanie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📦 Budowanie pakietu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../zaj07/publikowanie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📦 Publikowanie pakietu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projekt zaliczeniowy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Projekt zaliczeniowy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proj/wstep/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wstęp
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proj/technologie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technologie
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../proj/praca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rozszerzanie projektu
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#szybki-start-z-pytest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Szybki start z pytest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#organizacja-testow-w-repozytorium" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organizacja testów w repozytorium
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rodzaje-testow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rodzaje testów
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rodzaje testów">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testy-jednostkowe-unit-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testy jednostkowe (unit tests)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testy-integracyjne-integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testy integracyjne (integration tests)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testy-e2e-end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testy e2e (end-to-end)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asercje-w-pytest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asercje w pytest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testowanie-wyjatkow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testowanie wyjątków
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parametryzacja-testow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parametryzacja testów
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixtures
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fixtures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#podstawowe-uzycie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Podstawowe użycie
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixture-z-setup-i-teardown-yield" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixture z setup i teardown (yield)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scope-fixtures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scope fixtures
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plik-conftestpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plik conftest.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#markery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Markery
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mockowanie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mockowanie
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mockowanie">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#podstawowy-mock" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Podstawowy mock
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patchowanie-podmiana-w-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patchowanie (podmiana w runtime)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mock-z-pytest-mock-czystszy-syntax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mock z pytest-mock (czystszy syntax)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pokrycie-kodu-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pokrycie kodu (coverage)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wzorzec-aaa-arrange-act-assert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wzorzec AAA (Arrange-Act-Assert)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dobre-praktyki" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dobre praktyki
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dobre praktyki">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nazewnictwo-testow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nazewnictwo testów
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#izolacja-testow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Izolacja testów
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jeden-test-jedna-rzecz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jeden test = jedna rzecz
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zadania" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        📝 Zadania
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 Zadania">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-testy-jednostkowe-klasy-incident" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Testy jednostkowe klasy Incident
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-testy-jednostkowe-klasy-ambulance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Testy jednostkowe klasy Ambulance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-testy-klasy-incidentqueue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Testy klasy IncidentQueue
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-fixtures-i-conftestpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Fixtures i conftest.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-uruchom-testy-z-pokryciem-kodu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Uruchom testy z pokryciem kodu
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="testowanie-w-pythonie">Testowanie w Pythonie</h1>
+<p>Testowanie pozwala upewnić się, że kod działa poprawnie, że nowe zmiany nie psują istniejących funkcjonalności.</p>
+<p>W Pythonie standardem jest <code>pytest</code> - oferuje parametryzację, fixtures, czytelne asercje i bogaty ekosystem pluginów.</p>
+<h2 id="szybki-start-z-pytest">Szybki start z pytest</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Instalacja</span>
+conda<span class="w"> </span>install<span class="w"> </span>pytest
+
+<span class="c1"># Uruchomienie testów</span>
+pytest<span class="w">                      </span><span class="c1"># wszystkie testy</span>
+pytest<span class="w"> </span>tests/unit/<span class="w">          </span><span class="c1"># tylko folder</span>
+pytest<span class="w"> </span>tests/test_math.py<span class="w">   </span><span class="c1"># tylko plik</span>
+pytest<span class="w"> </span>-v<span class="w">                   </span><span class="c1"># szczegółowy output</span>
+pytest<span class="w"> </span>-x<span class="w">                   </span><span class="c1"># zatrzymaj po pierwszym błędzie</span>
+pytest<span class="w"> </span>-k<span class="w"> </span><span class="s2">&quot;add&quot;</span><span class="w">             </span><span class="c1"># tylko testy zawierające &quot;add&quot; w nazwie</span>
+</code></pre></div>
+<h2 id="organizacja-testow-w-repozytorium">Organizacja testów w repozytorium</h2>
+<div class="highlight"><pre><span></span><code>&lt;repo-main-folder&gt;/
+├── src/
+│   └── myapp/
+│       ├── __init__.py
+│       ├── cinema.py
+│       └── exceptions.py
+├── tests/
+│   ├── conftest.py          # Współdzielone fixtures
+│   ├── unit/
+│   │   ├── test_cinema.py
+│   │   └── test_exceptions.py
+│   ├── integration/
+│   │   └── test_database.py
+│   └── e2e/
+│       └── test_workflows.py
+├── pytest.ini
+└── pyproject.toml
+</code></pre></div>
+<p>Przykładowy <code>pytest.ini</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[pytest]</span>
+<span class="na">testpaths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">tests</span>
+<span class="na">python_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">test_*.py</span>
+<span class="na">python_functions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">test_*</span>
+<span class="na">addopts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">-v --tb=short</span>
+<span class="na">markers</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">slow</span><span class="o">:</span><span class="w"> </span><span class="s">marks tests as slow</span>
+<span class="w">    </span><span class="na">integration</span><span class="o">:</span><span class="w"> </span><span class="s">marks integration tests</span>
+</code></pre></div>
+<h2 id="rodzaje-testow">Rodzaje testów</h2>
+<h3 id="testy-jednostkowe-unit-tests">Testy jednostkowe (unit tests)</h3>
+<p>Testują pojedyncze funkcje/metody w izolacji. Szybkie, bez zewnętrznych zależności.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_add</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+    <span class="k">assert</span> <span class="n">add</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</code></pre></div>
+<h3 id="testy-integracyjne-integration-tests">Testy integracyjne (integration tests)</h3>
+<p>Weryfikują współpracę między modułami (np. z bazą danych).</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_save_and_retrieve</span><span class="p">():</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;:memory:&quot;</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;CREATE TABLE users (name TEXT)&quot;</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO users VALUES (?)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;Jan&quot;</span><span class="p">,))</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT name FROM users&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Jan&quot;</span>
+</code></pre></div>
+<h3 id="testy-e2e-end-to-end">Testy e2e (end-to-end)</h3>
+<p>Testują całą aplikację z perspektywy użytkownika.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_full_reservation_workflow</span><span class="p">():</span>
+    <span class="n">hall</span> <span class="o">=</span> <span class="n">CinemaHall</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seats_per_row</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># Użytkownik rezerwuje miejsce</span>
+    <span class="n">hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Jan Kowalski&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Próba rezerwacji zajętego miejsca</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">SeatOccupiedError</span><span class="p">):</span>
+        <span class="n">hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Anna Nowak&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Anulowanie i ponowna rezerwacja</span>
+    <span class="n">hall</span><span class="o">.</span><span class="n">cancel</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Jan Kowalski&quot;</span><span class="p">)</span>
+    <span class="n">hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Anna Nowak&quot;</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="n">hall</span><span class="o">.</span><span class="n">get_reservation</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Anna Nowak&quot;</span>
+</code></pre></div>
+<details class="note">
+<summary>Inne rodzaje testów</summary>
+<ul>
+<li><strong>Testy regresyjne</strong> - sprawdzają, czy nowe zmiany nie zepsuły istniejących funkcjonalności</li>
+<li><strong>Testy smoke</strong> - szybkie testy czy aplikacja w ogóle działa</li>
+<li><strong>Testy wydajnościowe</strong> - mierzą czas odpowiedzi i zużycie zasobów</li>
+<li><strong>Testy bezpieczeństwa</strong> - szukają luk (SQL Injection, XSS)</li>
+</ul>
+</details>
+<h2 id="asercje-w-pytest">Asercje w pytest</h2>
+<p>Asercja (<code>assert</code>) to instrukcja sprawdzająca, czy dany warunek jest prawdziwy - jeśli nie, test kończy się niepowodzeniem. Dzięki asercjom możemy w prosty sposób weryfikować, czy wynik działania kodu zgadza się z oczekiwanym.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_assertions</span><span class="p">():</span>
+    <span class="c1"># Równość</span>
+    <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="n">expected</span>
+    <span class="k">assert</span> <span class="n">result</span> <span class="o">!=</span> <span class="n">other</span>
+
+    <span class="c1"># Prawdziwość</span>
+    <span class="k">assert</span> <span class="n">condition</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">condition</span>
+
+    <span class="c1"># Zawieranie</span>
+    <span class="k">assert</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">collection</span>
+    <span class="k">assert</span> <span class="s2">&quot;substring&quot;</span> <span class="ow">in</span> <span class="n">text</span>
+
+    <span class="c1"># Typy</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">MyClass</span><span class="p">)</span>
+
+    <span class="c1"># Przybliżone porównania (float)</span>
+    <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="n">pytest</span><span class="o">.</span><span class="n">approx</span><span class="p">(</span><span class="mf">3.14</span><span class="p">,</span> <span class="n">rel</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+
+    <span class="c1"># Porównania</span>
+    <span class="k">assert</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span>
+    <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">100</span>
+</code></pre></div>
+<h2 id="testowanie-wyjatkow">Testowanie wyjątków</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Nie można dzielić przez zero&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_divide_by_zero</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">)</span> <span class="k">as</span> <span class="n">exc_info</span><span class="p">:</span>
+        <span class="n">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="s2">&quot;zero&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc_info</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_divide_by_zero_simple</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+        <span class="n">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Testowanie konkretnego komunikatu</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_divide_by_zero_match</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="n">match</span><span class="o">=</span><span class="s2">&quot;zero&quot;</span><span class="p">):</span>
+        <span class="n">divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="parametryzacja-testow">Parametryzacja testów</h2>
+<p>Zamiast pisać wiele podobnych testów, używamy <code>@pytest.mark.parametrize</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;a, b, expected&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+<span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">expected</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="n">expected</span>
+
+<span class="c1"># Parametryzacja z ID dla czytelności</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;seat, user, should_raise&quot;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Jan Kowalski&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Z99&quot;</span><span class="p">,</span> <span class="s2">&quot;Anna Nowak&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>  <span class="c1"># nieprawidłowe miejsce</span>
+<span class="p">],</span> <span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;valid_seat&quot;</span><span class="p">,</span> <span class="s2">&quot;invalid_seat&quot;</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_reserve</span><span class="p">(</span><span class="n">seat</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">should_raise</span><span class="p">):</span>
+    <span class="n">hall</span> <span class="o">=</span> <span class="n">CinemaHall</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">should_raise</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">InvalidSeatError</span><span class="p">):</span>
+            <span class="n">hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">seat</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">seat</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">hall</span><span class="o">.</span><span class="n">get_reservation</span><span class="p">(</span><span class="n">seat</span><span class="p">)</span> <span class="o">==</span> <span class="n">user</span>
+</code></pre></div>
+<h2 id="fixtures">Fixtures</h2>
+<p>Fixtures to funkcje przygotowujące dane lub zasoby dla testów.</p>
+<h3 id="podstawowe-uzycie">Podstawowe użycie</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cinema_hall</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tworzy salę kinową 3x3 do testów.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">CinemaHall</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">seats_per_row</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_reserve_seat</span><span class="p">(</span><span class="n">cinema_hall</span><span class="p">):</span>
+    <span class="n">cinema_hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Jan Kowalski&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">cinema_hall</span><span class="o">.</span><span class="n">get_reservation</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Jan Kowalski&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_hall_capacity</span><span class="p">(</span><span class="n">cinema_hall</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">cinema_hall</span><span class="o">.</span><span class="n">total_seats</span> <span class="o">==</span> <span class="mi">9</span>
+</code></pre></div>
+<h3 id="fixture-z-setup-i-teardown-yield">Fixture z setup i teardown (yield)</h3>
+<p>Fixture z <code>yield</code> pozwala podzielić kod na dwie fazy: setup (przed <code>yield</code>) przygotowuje zasoby, a teardown (po <code>yield</code>) je sprząta. Dzięki temu test otrzymuje gotowy zasób, a po jego zakończeniu następuje automatyczne zwolnienie zasobów - nawet jeśli test zakończy się błędem.</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">database</span><span class="p">():</span>
+    <span class="c1"># Setup</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;:memory:&quot;</span><span class="p">)</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;CREATE TABLE users (id INTEGER, name TEXT)&quot;</span><span class="p">)</span>
+
+    <span class="k">yield</span> <span class="n">conn</span>  <span class="c1"># Tu test się wykonuje</span>
+
+    <span class="c1"># Teardown</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_insert_user</span><span class="p">(</span><span class="n">database</span><span class="p">):</span>
+    <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO users VALUES (1, &#39;Jan&#39;)&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">database</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT name FROM users&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Jan&quot;</span>
+</code></pre></div>
+<h3 id="scope-fixtures">Scope fixtures</h3>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;function&quot;</span><span class="p">)</span>  <span class="c1"># domyślny - nowa instancja dla każdego testu</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fresh_hall</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">CinemaHall</span><span class="p">()</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;module&quot;</span><span class="p">)</span>  <span class="c1"># jedna instancja dla całego modułu</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">shared_config</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">load_config</span><span class="p">()</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>  <span class="c1"># jedna instancja dla całej sesji testów</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">database_connection</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">create_connection</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="plik-conftestpy">Plik <code>conftest.py</code></h3>
+<p>Fixtures zdefiniowane w <code>conftest.py</code> są dostępne dla wszystkich testów w danym folderze i podfolderach.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/conftest.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_user</span><span class="p">():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Jan&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;jan@example.com&quot;</span><span class="p">}</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cinema_hall</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">CinemaHall</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">seats_per_row</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+<p>Użycie fixtures w testach:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/unit/test_cinema.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_reserve_seat</span><span class="p">(</span><span class="n">cinema_hall</span><span class="p">,</span> <span class="n">sample_user</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test używa fixtures z conftest.py - nie trzeba ich importować.&quot;&quot;&quot;</span>
+    <span class="n">cinema_hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="n">sample_user</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+    <span class="k">assert</span> <span class="n">cinema_hall</span><span class="o">.</span><span class="n">get_reservation</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">sample_user</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_hall_capacity</span><span class="p">(</span><span class="n">cinema_hall</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Każdy test może używać tylko potrzebnych fixtures.&quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">cinema_hall</span><span class="o">.</span><span class="n">total_seats</span> <span class="o">==</span> <span class="mi">50</span>
+</code></pre></div>
+<h2 id="markery">Markery</h2>
+<p>Markery pozwalają kategoryzować i kontrolować wykonanie testów.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+
+<span class="c1"># Pomijanie testu</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">&quot;Funkcjonalność w trakcie implementacji&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_future_feature</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Warunkowe pomijanie</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">skipif</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;win32&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;Nie działa na Windows&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_unix_only</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Oczekiwany błąd</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">&quot;Znany bug #123&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_known_bug</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="n">broken_function</span><span class="p">()</span> <span class="o">==</span> <span class="n">expected</span>
+
+<span class="c1"># Własne markery</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">slow</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_heavy_computation</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="c1"># Uruchomienie: pytest -m &quot;not slow&quot;</span>
+</code></pre></div>
+<p>Rejestracja własnych markerów w <code>pytest.ini</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[pytest]</span>
+<span class="na">markers</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">slow</span><span class="o">:</span><span class="w"> </span><span class="s">marks tests as slow</span>
+<span class="w">    </span><span class="na">integration</span><span class="o">:</span><span class="w"> </span><span class="s">marks tests as integration tests</span>
+</code></pre></div>
+<h2 id="mockowanie">Mockowanie</h2>
+<p>Mockowanie zastępuje rzeczywiste zależności sztucznymi obiektami.</p>
+<h3 id="podstawowy-mock">Podstawowy mock</h3>
+<p>Podstawowy mock (<code>MagicMock</code>) to sztuczny obiekt, który tworzysz od zera i <strong>ręcznie</strong> przekazujesz do testowanego kodu. Musisz sam zadbać o to, żeby testowana funkcja używała tego mocka (np. przez argument lub dependency injection).</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="n">MagicMock</span><span class="p">,</span> <span class="n">patch</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_with_mock</span><span class="p">():</span>
+    <span class="c1"># Tworzenie mocka</span>
+    <span class="n">mock_db</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="n">mock_db</span><span class="o">.</span><span class="n">get_user</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Jan&quot;</span><span class="p">}</span>
+
+    <span class="c1"># Użycie</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">mock_db</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Weryfikacja</span>
+    <span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Jan&quot;</span>
+    <span class="n">mock_db</span><span class="o">.</span><span class="n">get_user</span><span class="o">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="patchowanie-podmiana-w-runtime">Patchowanie (podmiana w runtime)</h3>
+<p>Patchowanie (<code>patch</code>) <strong>automatycznie</strong> podmienia istniejący obiekt w module na mock w runtime. Nie musisz zmieniać sposobu wywołania - patch "wchodzi" do kodu i podmienia import, co jest przydatne gdy testujesz kod, który sam importuje zależności.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">unittest.mock</span><span class="w"> </span><span class="kn">import</span> <span class="n">patch</span>
+
+<span class="c1"># Jako dekorator</span>
+<span class="nd">@patch</span><span class="p">(</span><span class="s2">&quot;myapp.services.requests.get&quot;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_api_call</span><span class="p">(</span><span class="n">mock_get</span><span class="p">):</span>
+    <span class="n">mock_get</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">}</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">fetch_status</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="s2">&quot;ok&quot;</span>
+    <span class="n">mock_get</span><span class="o">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+
+<span class="c1"># Jako context manager</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_api_call_v2</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s2">&quot;myapp.services.requests.get&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mock_get</span><span class="p">:</span>
+        <span class="n">mock_get</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">status_code</span> <span class="o">=</span> <span class="mi">200</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">check_health</span><span class="p">()</span>
+
+        <span class="k">assert</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">True</span>
+</code></pre></div>
+<h3 id="mock-z-pytest-mock-czystszy-syntax">Mock z pytest-mock (czystszy syntax)</h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_with_mocker</span><span class="p">(</span><span class="n">mocker</span><span class="p">):</span>
+    <span class="n">mock_get</span> <span class="o">=</span> <span class="n">mocker</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="s2">&quot;myapp.api.requests.get&quot;</span><span class="p">)</span>
+    <span class="n">mock_get</span><span class="o">.</span><span class="n">return_value</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">}</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">()</span>
+
+    <span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">}</span>
+</code></pre></div>
+<h2 id="pokrycie-kodu-coverage">Pokrycie kodu (coverage)</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Instalacja</span>
+pip<span class="w"> </span>install<span class="w"> </span>pytest-cov
+
+<span class="c1"># Uruchomienie z coverage</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>myapp<span class="w"> </span>tests/
+
+<span class="c1"># Raport HTML</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>myapp<span class="w"> </span>--cov-report<span class="o">=</span>html<span class="w"> </span>tests/
+
+<span class="c1"># Minimalne pokrycie (fail jeśli poniżej)</span>
+pytest<span class="w"> </span>--cov<span class="o">=</span>myapp<span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">80</span><span class="w"> </span>tests/
+</code></pre></div>
+<p>Przykładowy output:</p>
+<div class="highlight"><pre><span></span><code>---------- coverage: platform linux, python 3.11 ----------
+Name                    Stmts   Miss  Cover
+-------------------------------------------
+myapp/__init__.py           2      0   100%
+myapp/cinema.py            45      3    93%
+myapp/exceptions.py        12      0   100%
+-------------------------------------------
+TOTAL                      59      3    95%
+</code></pre></div>
+<h2 id="wzorzec-aaa-arrange-act-assert">Wzorzec AAA (Arrange-Act-Assert)</h2>
+<p>Każdy test powinien mieć trzy wyraźne sekcje:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">test_reserve_seat</span><span class="p">():</span>
+    <span class="c1"># Arrange - przygotowanie danych</span>
+    <span class="n">hall</span> <span class="o">=</span> <span class="n">CinemaHall</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">seats_per_row</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">user</span> <span class="o">=</span> <span class="s2">&quot;Jan Kowalski&quot;</span>
+    <span class="n">seat</span> <span class="o">=</span> <span class="s2">&quot;A1&quot;</span>
+
+    <span class="c1"># Act - wykonanie akcji</span>
+    <span class="n">hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">seat</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+
+    <span class="c1"># Assert - sprawdzenie wyniku</span>
+    <span class="k">assert</span> <span class="n">hall</span><span class="o">.</span><span class="n">get_reservation</span><span class="p">(</span><span class="n">seat</span><span class="p">)</span> <span class="o">==</span> <span class="n">user</span>
+    <span class="k">assert</span> <span class="n">hall</span><span class="o">.</span><span class="n">available_seats</span> <span class="o">==</span> <span class="mi">8</span>
+</code></pre></div>
+<h2 id="dobre-praktyki">Dobre praktyki</h2>
+<h3 id="nazewnictwo-testow">Nazewnictwo testów</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ Źle</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_1</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_function</span><span class="p">():</span>
+
+<span class="c1"># ✅ Dobrze - opisuje co testujemy i oczekiwany wynik</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_reserve_valid_seat_succeeds</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_reserve_occupied_seat_raises_error</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_cancel_with_wrong_user_raises_error</span><span class="p">():</span>
+</code></pre></div>
+<h3 id="izolacja-testow">Izolacja testów</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ Źle - testy zależą od siebie</span>
+<span class="n">hall</span> <span class="o">=</span> <span class="n">CinemaHall</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_reserve</span><span class="p">():</span>
+    <span class="n">hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Jan&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_cancel</span><span class="p">():</span>
+    <span class="n">hall</span><span class="o">.</span><span class="n">cancel</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Jan&quot;</span><span class="p">)</span>  <span class="c1"># Zależy od test_reserve!</span>
+
+<span class="c1"># ✅ Dobrze - każdy test niezależny</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_reserve</span><span class="p">():</span>
+    <span class="n">hall</span> <span class="o">=</span> <span class="n">CinemaHall</span><span class="p">()</span>
+    <span class="n">hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Jan&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">hall</span><span class="o">.</span><span class="n">get_reservation</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Jan&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_cancel</span><span class="p">():</span>
+    <span class="n">hall</span> <span class="o">=</span> <span class="n">CinemaHall</span><span class="p">()</span>
+    <span class="n">hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Jan&quot;</span><span class="p">)</span>  <span class="c1"># Setup w teście</span>
+    <span class="n">hall</span><span class="o">.</span><span class="n">cancel</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Jan&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">hall</span><span class="o">.</span><span class="n">get_reservation</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+</code></pre></div>
+<h3 id="jeden-test-jedna-rzecz">Jeden test = jedna rzecz</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># ❌ Źle - testuje zbyt wiele</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_cinema_hall</span><span class="p">():</span>
+    <span class="n">hall</span> <span class="o">=</span> <span class="n">CinemaHall</span><span class="p">()</span>
+    <span class="n">hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Jan&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">hall</span><span class="o">.</span><span class="n">get_reservation</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Jan&quot;</span>
+    <span class="n">hall</span><span class="o">.</span><span class="n">cancel</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Jan&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">hall</span><span class="o">.</span><span class="n">get_reservation</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="n">SeatOccupiedError</span><span class="p">):</span>
+        <span class="n">hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Anna&quot;</span><span class="p">)</span>
+        <span class="n">hall</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;Piotr&quot;</span><span class="p">)</span>
+
+<span class="c1"># ✅ Dobrze - osobne testy</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_reserve_seat</span><span class="p">():</span>
+    <span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_cancel_reservation</span><span class="p">():</span>
+    <span class="o">...</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_reserve_occupied_seat_raises</span><span class="p">():</span>
+    <span class="o">...</span>
+</code></pre></div>
+<h2 id="zadania">📝 Zadania</h2>
+<p>Testy piszemy dla klas z projektu <code>python1course.zaj03</code> - <code>Incident</code>, <code>Ambulance</code> i <code>IncidentQueue</code>.</p>
+<h3 id="1-testy-jednostkowe-klasy-incident">1. Testy jednostkowe klasy <code>Incident</code></h3>
+<ul>
+<li>test tworzenia instancji z poprawnymi danymi,</li>
+<li>test <code>validate_priority()</code> dla poprawnych i niepoprawnych wartości,</li>
+<li>test <code>update_status()</code> - zmiana na poprawny i niepoprawny status (oczekiwany <code>ValueError</code>),</li>
+<li>test <code>get_age_in_minutes()</code> - sprawdź, że zwraca wartość &gt;= 0.</li>
+</ul>
+<h3 id="2-testy-jednostkowe-klasy-ambulance">2. Testy jednostkowe klasy <code>Ambulance</code></h3>
+<ul>
+<li>test walidacji statusu przez setter <code>@property</code> - poprawny status i oczekiwany <code>ValueError</code> dla niepoprawnego,</li>
+<li>test <code>validate_id()</code> dla różnych typów danych z użyciem parametryzacji,</li>
+<li>test <code>update_location()</code>.</li>
+</ul>
+<h3 id="3-testy-klasy-incidentqueue">3. Testy klasy <code>IncidentQueue</code></h3>
+<ul>
+<li>test dodawania incydentów (<code>+=</code>),</li>
+<li>test <code>__contains__</code> - incydent jest/nie jest w kolejce,</li>
+<li>test <code>__call__</code> - wyszukiwanie po ID (istniejący i nieistniejący),</li>
+<li>test <code>__len__</code>,</li>
+<li>test iteracji - sprawdź, że <code>for incident in queue</code> przechodzi przez wszystkie elementy w poprawnej kolejności,</li>
+<li>test zagnieżdżonej iteracji - jeśli przeprowadziłeś refaktoryzację z <code>zaj04</code> na <code>IncidentQueueIterator</code>, sprawdź że dwie niezależne pętle po tej samej kolejce działają poprawnie.</li>
+</ul>
+<h3 id="4-fixtures-i-conftestpy">4. Fixtures i <code>conftest.py</code></h3>
+<p>Stwórz w <code>conftest.py</code> fixtures:</p>
+<ul>
+<li><code>incident()</code> - zwraca gotową instancję <code>Incident</code> z przykładowymi danymi,</li>
+<li><code>ambulance()</code> - zwraca dostępną karetkę,</li>
+<li><code>queue_with_incidents()</code> - zwraca <code>IncidentQueue</code> z 3 incydentami.</li>
+</ul>
+<h3 id="5-uruchom-testy-z-pokryciem-kodu">5. Uruchom testy z pokryciem kodu</h3>
+<div class="highlight"><pre><span></span><code>pytest<span class="w"> </span>--cov<span class="o">=</span>python1course.zaj03<span class="w"> </span>tests/
+</code></pre></div>
+<details class="tip" open="open">
+<summary>Struktura plików</summary>
+<div class="highlight"><pre><span></span><code>tests/
+├── conftest.py
+└── unit/
+    └── zaj05/
+        ├── test_incident.py
+        ├── test_ambulance.py
+        └── test_incident_queue.py
+</code></pre></div>
+</details>
+<details class="- note">
+<summary>Połączenie z <code>zaj04</code> - <code>pytest.raises</code> to context manager</summary>
+<p>Zwróć uwagę, że <code>pytest.raises</code> używasz dokładnie tak jak <code>with FileLock(...)</code> z poprzednich zajęć:</p>
+<div class="highlight"><pre><span></span><code><span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+    <span class="n">ambulance</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;zły_status&quot;</span>
+</code></pre></div>
+<p>To nie przypadek - <code>pytest.raises</code> jest menadżerem kontekstu (<code>__enter__</code>/<code>__exit__</code>). Wewnątrz bloku <code>with</code> pytest "łapie" wyjątek zamiast pozwolić mu przerwać test.</p>
+</details>
+<details class="- note">
+<summary>Połączenie z <code>zaj04</code> - fixture z <code>yield</code> to ten sam wzorzec co context manager</summary>
+<p>Fixture z <code>yield</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tmp_file</span><span class="p">(</span><span class="n">tmp_path</span><span class="p">):</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">tmp_path</span> <span class="o">/</span> <span class="s2">&quot;test.txt&quot;</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>
+    <span class="k">yield</span> <span class="n">path</span>        <span class="c1"># tu wykonuje się test</span>
+    <span class="n">path</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>     <span class="c1"># teardown - sprzątanie po teście</span>
+</code></pre></div>
+<p>To dokładnie ten sam wzorzec co <code>__enter__</code> / <code>__exit__</code>:</p>
+<ul>
+<li>kod przed <code>yield</code> = <code>__enter__</code> (setup),</li>
+<li>kod po <code>yield</code> = <code>__exit__</code> (teardown, wywołany zawsze - nawet gdy test się wysypie).</li>
+</ul>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright 2024 Jakub Staszel KGiIS AGH
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
